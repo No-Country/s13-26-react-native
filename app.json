@@ -16,6 +16,15 @@
       ]
     ],
     "name": "s13-26-react-native",
-    "slug": "s13-26-react-native"
+    "slug": "welltechapp",
+    "extra": {
+      "router": {
+        "origin": "https://n"
+      },
+      "eas": {
+        "projectId": "338b9e1b-3826-4747-a2eb-283fc73753bd"
+      }
+    },
+    "owner": "s13-26-react-native"
   }
 }
