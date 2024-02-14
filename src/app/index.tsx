@@ -1,14 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import Auth from '../components/auth';
 
-import { MotiView } from 'moti';
+import { Redirect } from 'expo-router';
 
 export default function Page() {
-  return (
-      <View>
-        <Auth />
-
-      </View>
-  );
+  return <Redirect href={'/loginScreen'}></Redirect>;
 }
