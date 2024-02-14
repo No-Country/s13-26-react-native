@@ -17,24 +17,19 @@ const Auth = () => {
   const setPassword = useAuthStore((state) => state.setPassword);
   const setAuthRes = useAuthStore((state) => state.setAuthRes);
   const auth = Firebase_Auth;
+  
   const [signOut] = useSignOut(auth);
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
   const signIn = () => {
-    console.log(email, password);
     signInWithEmailAndPassword(email, password);
     setAuthRes(user);
-    console.log(user);
-    console.log('authres: ', authres?._tokenResponse.email);
-    console.log(error);
   };
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+
   const signUp = () => {
     signOut();
-    console.log(email, password);
     createUserWithEmailAndPassword(email, password);
-    setAuthRes(user);
-    console.log(user);
   };
 
   return (
