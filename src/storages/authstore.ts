@@ -3,7 +3,7 @@ import { create, set } from 'zustand';
 type AuthStore = {
   email: string;
   password: string;
-  authres: string;
+  authres: UserCredential;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
   setAuthRes: (authres: string) => void;
@@ -13,7 +13,7 @@ type AuthStore = {
 export const useAuthStore = create<AuthStore>((set) => ({
   email: '',
   password: '',
-  authres: '',
+  authres: {},
   setEmail: (email) => {
     set((state) => ({ email: email }));
   },

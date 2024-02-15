@@ -9,7 +9,10 @@ import {
   useSignOut,
 } from 'react-firebase-hooks/auth';
 
+import { useRouter } from 'expo-router';
+
 const Auth = () => {
+  const router = useRouter();
   const email = useAuthStore((state) => state.email);
   const password = useAuthStore((state) => state.password);
   const authres = useAuthStore((state) => state.authres);
@@ -17,13 +20,14 @@ const Auth = () => {
   const setPassword = useAuthStore((state) => state.setPassword);
   const setAuthRes = useAuthStore((state) => state.setAuthRes);
   const auth = Firebase_Auth;
-  
+
   const [signOut] = useSignOut(auth);
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
   const signIn = () => {
     signInWithEmailAndPassword(email, password);
     setAuthRes(user);
+    router.replace('homescreen');
   };
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
 
@@ -33,7 +37,7 @@ const Auth = () => {
   };
 
   return (
-    <View className="mt-20">
+    <View>
       <TextInput
         inputMode="email"
         textContentType="emailAddress"
