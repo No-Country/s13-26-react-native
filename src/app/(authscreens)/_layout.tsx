@@ -12,13 +12,13 @@ export default function Layout() {
       }}
     >
       <Stack.Screen
-        name="loginscreen"
+        name="loginScreen"
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="registerscreen"
+        name="registerScreen"
         options={{
           headerShown: false,
           gestureEnabled: true,

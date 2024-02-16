@@ -8,6 +8,6 @@ export default function Page() {
 
   if (!rootNavigationState?.key) return <ActivityIndicator color={'#fff'} size={'large'} />;
 
-  if (logged) return <Redirect href={'homescreen'}></Redirect>;
-  return <Redirect href={'loginscreen'}></Redirect>;
+  if (logged) return <Redirect href={'homeScreen'}></Redirect>;
+  return <Redirect href={'loginScreen'}></Redirect>;
 }

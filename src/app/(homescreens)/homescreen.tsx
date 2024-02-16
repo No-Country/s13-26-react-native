@@ -1,22 +1,34 @@
-import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import { useRouter, Redirect } from 'expo-router';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { useSignOut, useAuthState } from 'react-firebase-hooks/auth';
+import { Firebase_Auth } from '@/components/auth/FirebaseConfig';
+import Boton from '../../ui/Boton';
 
-export default function HomePage() {
-  const router = useRouter();
+function HomeScreen() {
+  const [signOut, loadingOut] = useSignOut(Firebase_Auth);
+
+  const [user, lading, error] = useAuthState(Firebase_Auth);
+
+  function handleVerifyMail() {}
+
   return (
-    <View style={style.container}>
-      <Text>Home</Text>
-      <Button title="Salir" onPress={() => router.replace('loginscreen')}></Button>
+    <View>
+      <Text>Home Page</Text>
+      <Text>Bienvenido {user?.displayName || 'Sin nombre'}</Text>
+      <Text>Tu email es: {user?.email}</Text>
+      {!user?.emailVerified && (
+        <Pressable onPress={handleVerifyMail}>
+          <Text>Verifica tu mail</Text>
+        </Pressable>
+      )}
+      {loadingOut ? (
+        <ActivityIndicator size="large" color="#ffffff" />
+      ) : (
+        <View style={{ alignItems: 'center' }}>
+          <Boton title="Cerrar sesión" onPress={signOut} />
+        </View>
+      )}
     </View>
   );
 }
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+export default HomeScreen;
