@@ -1,6 +1,7 @@
 import 'react-native-reanimated';
 import 'react-native-gesture-handler';
 import { Slot } from 'expo-router';
+import { SafeAreaView } from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
 
 export default function Layout() {
