@@ -45,7 +45,9 @@ const Auth = () => {
 
   return (
     <SafeAreaView style={styles.contenedor}>
-      <Text style={styles.titulo}>Iniciar sesión</Text>
+      <View style={styles.contenedorTitulo}>
+        <Text style={styles.titulo}>Iniciar sesión</Text>
+      </View>
 
       <Formik
         initialValues={{ email: '', password: '' }}
@@ -123,9 +125,9 @@ const Auth = () => {
         )}
       </Formik>
 
-      <View>
+      <View style={styles.redirectLink}>
         <Text>Aun no tienes una cuenta?</Text>
-        <Link push href={'/registerScreen'}>
+        <Link replace href={'/registerScreen'}>
           <Text style={{ fontWeight: 'bold' }}>Registrarse</Text>
         </Link>
       </View>
@@ -140,6 +142,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+  },
+  contenedorTitulo: {
+    flex: 1,
+    justifyContent: 'center',
   },
   titulo: {
     fontWeight: 'bold',
@@ -194,6 +200,10 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     borderColor: 'red',
+  },
+  redirectLink: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 

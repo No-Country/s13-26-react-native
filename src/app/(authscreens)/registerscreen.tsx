@@ -30,6 +30,11 @@ const Auth = () => {
       .min(6, 'Muy corto! Minimo 6 caracteres')
       .max(15, 'Muy largo! Maximo 15 caracteres')
       .required('Contraseña requerida'),
+    passwordConfirm: Yup.string().oneOf(
+      [Yup.ref('password'), null],
+      'Las contraseñas deben coincidir'
+    ),
+
     nacimiento: Yup.string()
       .matches(
         /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
@@ -68,13 +73,16 @@ const Auth = () => {
 
   return (
     <SafeAreaView style={styles.contenedor}>
-      <Text style={styles.titulo}>Crea tu cuenta</Text>
+      <View style={styles.contenedorTitulo}>
+        <Text style={styles.titulo}>Crea tu cuenta</Text>
+      </View>
       <Formik
         initialValues={{
           nombre: '',
           email: '',
           password: '',
           nacimiento: '',
+          passwordConfirm: '',
         }}
         onSubmit={(values) => signUp(values.email, values.password, values.nombre)}
         validationSchema={SignupSchema}
@@ -125,7 +133,8 @@ const Auth = () => {
 
             {/* ----------FECHA NACIMIENTO---------- */}
             <TextInput
-              inputMode="none"
+              inputMode="text"
+              keyboardType="default"
               placeholderTextColor={
                 errors.nacimiento?.length && touched.nacimiento ? 'red' : 'black'
               }
@@ -146,6 +155,8 @@ const Auth = () => {
 
             {/* ----------CONTRASEÑA---------- */}
             <TextInput
+              inputMode="text"
+              keyboardType="visible-password"
               secureTextEntry={!mostrarContraseña}
               placeholder="Contraseña"
               onChangeText={handleChange('password')}
@@ -160,6 +171,28 @@ const Auth = () => {
             />
             {errors.password && touched.password ? (
               <Text style={styles.error}>{errors.password}</Text>
+            ) : null}
+
+            {/* ----------VERIFICAR CONTRASEÑA---------- */}
+            <TextInput
+              inputMode="text"
+              keyboardType="visible-password"
+              secureTextEntry={!mostrarContraseña}
+              placeholder="Verificar contraseña"
+              onChangeText={handleChange('passwordConfirm')}
+              onBlur={handleBlur('passwordConfirm')}
+              value={values.passwordConfirm}
+              style={[
+                styles.textInput,
+                values?.passwordConfirm?.length ? styles.textInputAct : {},
+                errors?.passwordConfirm?.length && touched?.passwordConfirm ? styles.error : {},
+              ]}
+              placeholderTextColor={
+                errors?.passwordConfirm?.length && touched?.passwordConfirm ? 'red' : 'black'
+              }
+            />
+            {errors.passwordConfirm && touched.passwordConfirm ? (
+              <Text style={styles.error}>{errors.passwordConfirm}</Text>
             ) : null}
 
             <Pressable
@@ -186,17 +219,18 @@ const Auth = () => {
                 <Boton
                   onPress={handleSubmit}
                   title="Registrarse"
-                  styles={isValid ? styles.botonDesactivado : null}
+                  styles={!isValid ? styles.botonDesactivado : null}
                 />
               </View>
             )}
           </KeyboardAvoidingView>
         )}
       </Formik>
-      <View>
+
+      <View style={styles.redirectLink}>
         <Text>Ya tienes una cuenta?</Text>
         <Link replace href={'/loginScreen'}>
-          Iniciar Sesión
+          <Text style={{ fontWeight: 'bold' }}>Iniciar Sesión</Text>
         </Link>
       </View>
     </SafeAreaView>
@@ -205,17 +239,25 @@ const Auth = () => {
 
 const styles = StyleSheet.create({
   contenedor: {
-    padding: 20,
-    paddingHorizontal: 40,
+    margin: 20,
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  contenedorTitulo: {
+    flex: 1,
+    justifyContent: 'center',
   },
   titulo: {
     fontWeight: 'bold',
     fontSize: 30,
   },
   textInput: {
+    height: 50,
     borderWidth: 2,
-    borderColor: 'grey',
-    borderRadius: 5,
+    borderColor: 'black',
+    borderRadius: 12,
     padding: 20,
     paddingTop: 0,
     paddingBottom: 20,
@@ -226,31 +268,44 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   text: {
-    fontSize: 12,
+    fontSize: 14,
   },
   mostrarContraseñaContenedor: {
-    overflow: 'hidden',
+    marginTop: 10,
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-around',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: 10,
   },
-  mostrarContraseñaTexto: {},
+  mostrarContraseñaTexto: {
+    fontSize: 12,
+  },
   mostrarContraseñaCheckBox: {
     color: 'transparent',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   mostrarContraseñaCheckBoxAct: {
-    backgroundColor: 'black',
+    color: '#000',
+    paddingHorizontal: 5,
+    fontWeight: 'bold',
   },
   mostrarContraseñaCheckBoxDesact: {},
   contenedorBoton: {
-    alignItems: 'center',
+    marginTop: 30,
+    minWidth: '100%',
+    backgroundColor: '#fff',
   },
   botonDesactivado: { backgroundColor: 'grey' },
   error: {
     color: 'red',
     borderColor: 'red',
+  },
+  redirectLink: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 
