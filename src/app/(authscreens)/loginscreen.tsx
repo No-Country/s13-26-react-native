@@ -76,7 +76,7 @@ const Auth = () => {
               onBlur={handleBlur('password')}
               value={values.password}
               secureTextEntry={!mostrarContraseña}
-              placeholder="password"
+              placeholder="Contraseña"
               style={[
                 styles.textInput,
                 values.password.length ? styles.textInputAct : styles.textInput,
@@ -132,8 +132,7 @@ const Auth = () => {
 
 const styles = StyleSheet.create({
   contenedor: {
-    padding: 20,
-    paddingHorizontal: 40,
+    margin: 20,
   },
   titulo: {
     fontWeight: 'bold',
