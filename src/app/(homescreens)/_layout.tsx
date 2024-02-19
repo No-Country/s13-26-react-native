@@ -9,7 +9,7 @@ export default function AppLayout() {
       }}
     >
       <Tabs.Screen
-        name="homescreen"
+        name="homeScreen"
         options={{
           title: 'Inicio',
 
@@ -19,7 +19,7 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="statsscreen"
+        name="statsScreen"
         options={{
           title: 'Metas',
           tabBarIcon: ({ focused }) => (

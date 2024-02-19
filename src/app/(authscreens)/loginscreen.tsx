@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { Firebase_Auth } from '@/components/auth/FirebaseConfig';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import Boton from '../../ui/Boton';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -21,10 +21,11 @@ const Auth = () => {
     email: Yup.string().email('Email invalido').required('Requerido'),
     password: Yup.string().min(6, 'Muy corto!').max(50, 'Muy largo!').required('Requerido'),
   });
-
+  
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
-
+  
   const auth = Firebase_Auth;
+  const router = useRouter();
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
   const signIn = async (email, password) => {
@@ -32,7 +33,8 @@ const Auth = () => {
       const login = await signInWithEmailAndPassword(email, password);
       if (login) {
         // setAuthRes(login);
-        alert('Sesión iniciada');
+        router.replace('homescreen');
+        // alert('Sesión iniciada');
       } else {
         alert('Problemas al iniciar sesión: ' + error);
       }
@@ -122,7 +124,7 @@ const Auth = () => {
 
       <View>
         <Text>Aun no tienes una cuenta?</Text>
-        <Link replace href={'/registerScreen'}>
+        <Link replace href={'/registerscreen'}>
           Registrarse
         </Link>
       </View>

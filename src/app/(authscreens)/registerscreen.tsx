@@ -195,7 +195,7 @@ const Auth = () => {
       </Formik>
       <View>
         <Text>Ya tienes una cuenta?</Text>
-        <Link replace href={'/loginScreen'}>
+        <Link replace href={'/loginscreen'}>
           Iniciar Sesión
         </Link>
       </View>
