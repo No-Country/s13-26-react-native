@@ -19,18 +19,19 @@ export default function Boton(props: props) {
 
 const styles = StyleSheet.create({
   button: {
-    height: 50,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 12,
-    backgroundColor: '#104771',
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    borderRadius: 10,
+    backgroundColor: '#1D1D1B',
   },
   text: {
-    fontSize: 14,
-    lineHeight: 21,
-    fontWeight: 'bold',
+    fontFamily: 'montserrat_medium',
+    fontSize: 16,
+    lineHeight: 19.5,
+    fontWeight: '500',
     letterSpacing: 0.25,
     color: 'white',
   },

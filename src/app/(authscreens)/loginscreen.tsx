@@ -45,7 +45,7 @@ const Auth = () => {
 
   return (
     <SafeAreaView style={styles.contenedor}>
-      <Text style={styles.titulo}>Iniciar sesión</Text>
+      <Text style={styles.titulo}>(Paréntesis)</Text>
 
       <Formik
         initialValues={{ email: '', password: '' }}
@@ -124,9 +124,9 @@ const Auth = () => {
       </Formik>
 
       <View>
-        <Text>Aun no tienes una cuenta?</Text>
+        <Text style={{ fontFamily: 'montserrat_regular' }}>Aun no tienes una cuenta?</Text>
         <Link push href={'/registerScreen'}>
-          <Text style={{ fontWeight: 'bold' }}>Registrarse</Text>
+          <Text style={{ fontWeight: 'bold', fontFamily: 'montserrat_semibold' }}>Registrarse</Text>
         </Link>
       </View>
     </SafeAreaView>
@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
   titulo: {
     fontWeight: 'bold',
     fontSize: 30,
+    fontFamily: 'montserrat_semibold',
   },
   textInput: {
     height: 50,
@@ -154,6 +155,8 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 20,
     marginTop: 20,
+    fontSize: 12,
+    fontFamily: 'montserrat_regular',
   },
   textInputAct: {
     paddingTop: 10,
@@ -161,6 +164,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
+    fontFamily: 'montserrat_regular',
   },
   mostrarContraseñaContenedor: {
     marginTop: 10,
@@ -173,6 +177,7 @@ const styles = StyleSheet.create({
   },
   mostrarContraseñaTexto: {
     fontSize: 12,
+    fontFamily: 'montserrat_regular',
   },
   mostrarContraseñaCheckBox: {
     color: 'transparent',
@@ -194,6 +199,8 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     borderColor: 'red',
+    fontFamily: 'montserrat_regular',
+    fontSize: 12,
   },
 });
 
