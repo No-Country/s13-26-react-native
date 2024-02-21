@@ -42,7 +42,11 @@ export const Row = ({ children }) => <View style={{ flexDirection: 'row' }}>{chi
 
 export function GridHome({ children }) {
   return (
-    <ScrollView contentContainerStyle={{ justifyContent: 'center' }} style={style.grid}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ justifyContent: 'center' }}
+      style={style.grid}
+    >
       {children}
     </ScrollView>
   );
