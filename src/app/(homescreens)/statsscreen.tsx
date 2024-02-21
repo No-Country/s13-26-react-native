@@ -11,9 +11,11 @@ export default function StatsPage() {
 
 const style = StyleSheet.create({
   container: {
+    paddingVertical: 21,
+    paddingHorizontal: 16,
     flex: 1,
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
 });
