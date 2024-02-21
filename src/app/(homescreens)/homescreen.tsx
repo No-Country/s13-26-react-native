@@ -43,14 +43,6 @@ function HomeScreen() {
             <OpcionHome text="Fatiga"></OpcionHome>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <OpcionHome text="NA"></OpcionHome>
-          </Col>
-          <Col>
-            <OpcionHome text="NA"></OpcionHome>
-          </Col>
-        </Row>
       </GridHome>
     </View>
   );
