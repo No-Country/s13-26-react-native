@@ -17,6 +17,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { Ionicons } from '@expo/vector-icons';
+import useAuth from '@/assets/hooks/useAuth';
 
 const Auth = () => {
   const SigninSchema = Yup.object().shape({
@@ -30,16 +31,11 @@ const Auth = () => {
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
   const signIn = async (email, password) => {
-    try {
-      const login = await signInWithEmailAndPassword(email, password);
-      if (login) {
-        // setAuthRes(login);
-        alert('Sesión iniciada');
-      } else {
-        alert('Problemas al iniciar sesión: ' + error);
-      }
-    } catch (error) {
-      alert('Problemas al iniciar sesión: ' + error);
+    const login = await signInWithEmailAndPassword(email, password);
+    if (login) {
+      alert('Sesión iniciada');
+    } else {
+      alert('Problemas al iniciar sesión');
     }
   };
 
