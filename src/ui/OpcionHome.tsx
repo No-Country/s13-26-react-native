@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, View, Text, ScrollView } from 'react-native';
 
-function OpcionHome({ text = 'Vacio' }) {
+function OpcionHome({ text = 'Vacio', onClick = () => {} }) {
   return (
-    <TouchableOpacity style={[style.item]}>
+    <TouchableOpacity onPress={onClick} style={[style.item]}>
       <View
         style={{
           backgroundColor: '#D9D9D9',

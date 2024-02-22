@@ -3,7 +3,10 @@ import { useState } from 'react';
 import Boton from '../../ui/Boton';
 import { Feather } from '@expo/vector-icons';
 import OpcionHome, { GridHome, Col, Row } from '@/ui/OpcionHome';
+import { useRouter } from 'expo-router';
+
 function HomeScreen() {
+  const router = useRouter();
   const [username, setUsername] = useState('Ana');
   const [hours, setHours] = useState(0);
   return (
@@ -29,18 +32,38 @@ function HomeScreen() {
       <GridHome>
         <Row>
           <Col>
-            <OpcionHome text="Corporal"></OpcionHome>
+            <OpcionHome
+              onClick={() => {
+                router.push('/homeScreen/Corporales');
+              }}
+              text="Corporal"
+            ></OpcionHome>
           </Col>
           <Col>
-            <OpcionHome text="Visual"></OpcionHome>
+            <OpcionHome
+              onClick={() => {
+                router.push('/homeScreen/Visuales');
+              }}
+              text="Visual"
+            ></OpcionHome>
           </Col>
         </Row>
         <Row>
           <Col>
-            <OpcionHome text="Estrés"></OpcionHome>
+            <OpcionHome
+              onClick={() => {
+                router.push('/homeScreen/Estrés');
+              }}
+              text="Estrés"
+            ></OpcionHome>
           </Col>
           <Col>
-            <OpcionHome text="Fatiga"></OpcionHome>
+            <OpcionHome
+              onClick={() => {
+                router.push('/homeScreen/Fatiga');
+              }}
+              text="Fatiga"
+            ></OpcionHome>
           </Col>
         </Row>
       </GridHome>

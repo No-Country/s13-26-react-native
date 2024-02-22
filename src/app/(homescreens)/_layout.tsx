@@ -18,7 +18,7 @@ export default function AppLayout() {
       <Tabs.Screen
         name="homeScreen"
         options={{
-          title: 'Inicio',
+          title: 'Paréntesis',
           tabBarIcon: ({ focused }) => (
             <Feather name="home" size={26} color={focused ? 'black' : '#6F6E6E'} />
           ),
