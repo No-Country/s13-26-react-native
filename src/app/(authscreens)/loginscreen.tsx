@@ -15,6 +15,8 @@ import { Link, useRouter } from 'expo-router';
 import Boton from '../../ui/Boton';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { Ionicons } from '@expo/vector-icons';
 
 const Auth = () => {
   const SigninSchema = Yup.object().shape({
@@ -78,7 +80,7 @@ const Auth = () => {
               onBlur={handleBlur('password')}
               value={values.password}
               secureTextEntry={!mostrarContraseña}
-              placeholder="password"
+              placeholder="Contraseña"
               style={[
                 styles.textInput,
                 values.password.length ? styles.textInputAct : styles.textInput,
@@ -90,21 +92,22 @@ const Auth = () => {
               <Text style={styles.error}>{errors.password}</Text>
             ) : null}
 
-            <Pressable
-              style={styles.mostrarContraseñaContenedor}
-              onPress={() => setMostrarContraseña(!mostrarContraseña)}
-            >
+            <Pressable style={styles.mostrarContraseñaContenedor}>
               <Text style={styles.mostrarContraseñaTexto}>Mostrar contraseña</Text>
-              <Text
-                style={[
-                  styles.mostrarContraseñaCheckBox,
-                  mostrarContraseña
-                    ? styles.mostrarContraseñaCheckBoxAct
-                    : styles.mostrarContraseñaCheckBoxDesact,
-                ]}
-              >
-                X
-              </Text>
+              <BouncyCheckbox
+                size={22}
+                fillColor="black"
+                unfillColor="#FFFFFF"
+                innerIconStyle={{ borderWidth: 1.5 }}
+                iconComponent={
+                  !mostrarContraseña ? (
+                    <Ionicons name="eye-off-outline" size={14} color={'black'} />
+                  ) : (
+                    <Ionicons name="eye" size={14} color={'white'} />
+                  )
+                }
+                onPress={() => setMostrarContraseña(!mostrarContraseña)}
+              />
             </Pressable>
 
             {loading ? (
@@ -124,8 +127,8 @@ const Auth = () => {
 
       <View>
         <Text>Aun no tienes una cuenta?</Text>
-        <Link replace href={'/registerscreen'}>
-          Registrarse
+        <Link push href={'/registerScreen'}>
+          <Text style={{ fontWeight: 'bold' }}>Registrarse</Text>
         </Link>
       </View>
     </SafeAreaView>
@@ -134,17 +137,21 @@ const Auth = () => {
 
 const styles = StyleSheet.create({
   contenedor: {
-    padding: 20,
-    paddingHorizontal: 40,
+    margin: 20,
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
   titulo: {
     fontWeight: 'bold',
     fontSize: 30,
   },
   textInput: {
+    height: 50,
     borderWidth: 2,
-    borderColor: 'grey',
-    borderRadius: 5,
+    borderColor: 'black',
+    borderRadius: 12,
     padding: 20,
     paddingTop: 0,
     paddingBottom: 20,
@@ -155,26 +162,35 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   text: {
-    fontSize: 12,
+    fontSize: 14,
   },
   mostrarContraseñaContenedor: {
-    overflow: 'hidden',
+    marginTop: 10,
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-around',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: 10,
   },
-  mostrarContraseñaTexto: {},
+  mostrarContraseñaTexto: {
+    fontSize: 12,
+  },
   mostrarContraseñaCheckBox: {
     color: 'transparent',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   mostrarContraseñaCheckBoxAct: {
-    backgroundColor: 'black',
+    color: '#000',
+    paddingHorizontal: 5,
+    fontWeight: 'bold',
   },
   mostrarContraseñaCheckBoxDesact: {},
   contenedorBoton: {
-    alignItems: 'center',
+    marginTop: 30,
+    minWidth: '100%',
+    backgroundColor: '#fff',
   },
   botonDesactivado: { backgroundColor: 'grey' },
   error: {
