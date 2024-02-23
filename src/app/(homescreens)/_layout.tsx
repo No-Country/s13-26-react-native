@@ -1,29 +1,44 @@
 import { Tabs } from 'expo-router/tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { Octicons, Feather, FontAwesome5 } from '@expo/vector-icons';
+import { Image } from 'react-native';
 
 export default function AppLayout() {
   return (
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
+        headerTitleStyle: {
+          fontFamily: 'montserrat_semibold',
+          fontSize: 16,
+        },
+        headerStyle: { backgroundColor: '#D9D9D9' },
+        tabBarStyle: { borderTopWidth: 1, borderTopColor: 'rgba(146, 153, 157, .3)' },
       }}
     >
       <Tabs.Screen
         name="homeScreen"
         options={{
-          title: 'Inicio',
-
+          title: 'Paréntesis',
           tabBarIcon: ({ focused }) => (
-            <Ionicons name="home" size={24} color={focused ? 'black' : 'grey'} />
+            <Feather name="home" size={26} color={focused ? 'black' : '#6F6E6E'} />
           ),
         }}
       />
       <Tabs.Screen
         name="statsScreen"
         options={{
-          title: 'Metas',
+          title: 'Historial',
           tabBarIcon: ({ focused }) => (
-            <Ionicons name="golf" size={24} color={focused ? 'black' : 'grey'} />
+            <Feather name="award" size={25} color={focused ? 'black' : '#6F6E6E'} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settingsScreen"
+        options={{
+          title: 'Ajustes',
+          tabBarIcon: ({ focused }) => (
+            <Octicons name="gear" size={26} color={focused ? 'black' : '#6F6E6E'} />
           ),
         }}
       />
@@ -32,7 +47,7 @@ export default function AppLayout() {
         options={{
           title: 'Perfil',
           tabBarIcon: ({ focused }) => (
-            <Ionicons name="person" size={24} color={focused ? 'black' : 'grey'} />
+            <FontAwesome5 name="user" size={25} color={focused ? 'black' : '#6F6E6E'} />
           ),
         }}
       />
