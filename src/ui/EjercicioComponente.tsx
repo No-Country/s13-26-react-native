@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { TouchableOpacity, StyleSheet, View, Text, ScrollView } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, Text, Image } from 'react-native';
 
-function EjercicioComponente({ title = 'falta', onClick }) {
+function EjercicioComponente({ title = 'falta', url, onClick }) {
   return (
     <>
       <TouchableOpacity onPress={onClick} style={{ marginBottom: 15 }}>
@@ -22,7 +22,9 @@ function EjercicioComponente({ title = 'falta', onClick }) {
               flex: 1,
               backgroundColor: '#D9D9D9',
             }}
-          ></View>
+          >
+            <Image source={{ uri: url }} style={{ width: '100%', height: '100%' }}/>
+          </View>
           <View
             style={{
               display: 'flex',

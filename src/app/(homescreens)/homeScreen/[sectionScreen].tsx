@@ -1,51 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import EjercicioComponente from '@/ui/EjercicioComponente';
 import SpecificVideo from './specificVideo/[specificVideo]';
 
-const DATA = [
-  {
-    id:1,
-    title: 'Giro de hombros hacia adelante y hacia atrás',
-  },
-  {
-    id:2,
-
-    title: 'Rotación de hombros y brazos',
-  },
-  {
-    id:3,
-
-    title: 'Elongación de hombros y brazos',
-  },
-  {    id:4,
-
-    title: 'Rotación de tronco',
-  },
-  {    id:5,
-
-    title: 'Extensión lumbar',
-  },
-  {    id:6,
-
-    title: 'Contracción abdominal',
-  },
-];
+import { collection, getDocs } from 'firebase/firestore';
+import { Firestore_Db as db } from '@/components/auth/FirebaseConfig';
 
 function SectionScreen() {
+  const [data, setData] = useState<{ id: string, [key: string]: any }[]>([]);
+  const [loading, setLoading] = useState(true); 
   const { sectionScreen } = useLocalSearchParams();
-  const  router= useRouter()
+  const router = useRouter();
+
+  useEffect(() => {
+    const obtenerEjercicios = async () => {
+      const ejerciciosRef = collection(db, 'exercises');
+      const snapshot = await getDocs(ejerciciosRef);
+      const ejercicios = [];
+      snapshot.forEach(doc => {
+        ejercicios.push({ id: doc.id, ...doc.data() });
+      });
+      setData(ejercicios);
+      setLoading(false);
+    };
+    obtenerEjercicios();
+  }, []);
+
   return (
     <View style={style.container}>
       <Text style={style.textgreet}>Ejercicios {sectionScreen}</Text>
       <ScrollView contentContainerStyle={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-        <FlashList
-          data={DATA}
-          renderItem={({ item }) => <EjercicioComponente title={item.title} onClick={() => (router.push({pathname:`/homeScreen/specificVideo/${item.id}`,  params: item}))}></EjercicioComponente>}
-          estimatedItemSize={111}
-        />
+        {loading ? ( 
+          <View style={style.loadingContainer}>
+            <ActivityIndicator size="large" color="black" />
+            <Text style={style.loadingText}>Cargando...</Text>
+          </View>
+        ) : (
+          <FlashList
+            data={data}
+            renderItem={({ item }) => <EjercicioComponente title={item?.titulo} url={item?.url} onClick={() => (router.push({ pathname: `/homeScreen/specificVideo/${item?.id}`, params: item }))}></EjercicioComponente>}
+            estimatedItemSize={111}
+          />
+        )}
+
       </ScrollView>
     </View>
   );
@@ -63,6 +62,16 @@ const style = StyleSheet.create({
     fontFamily: 'montserrat_semibold',
     fontSize: 16,
     marginBottom: 25,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    fontFamily: 'montserrat_regular',
   },
 });
 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Button, ActivityIndicator } from 'react-native';
+import React from 'react'
+import { View, TextInput, StyleSheet, Button, ActivityIndicator, Alert } from 'react-native';
 import { Firebase_Auth } from '@/components/auth/FirebaseConfig';
 
 import { useAuthStore } from '@/storages/authstore';
@@ -23,14 +23,13 @@ const Auth = () => {
 
   const [signOut] = useSignOut(auth);
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
 
   const signIn = () => {
     signInWithEmailAndPassword(email, password);
     setAuthRes(user);
     router.replace('homescreen');
   };
-  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
-
   const signUp = () => {
     signOut();
     createUserWithEmailAndPassword(email, password);
