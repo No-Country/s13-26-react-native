@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Redirect, useRootNavigationState } from 'expo-router';
+import { InitialLayout } from './(initiallogin)/_layout';
 
 export default function Page() {
   const [logged, setLogged] = useState(true);

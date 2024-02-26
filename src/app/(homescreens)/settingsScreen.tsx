@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 import Boton from '../../ui/Boton';
 import { useSignOut, useAuthState } from 'react-firebase-hooks/auth';
 import { Firebase_Auth } from '@/components/auth/FirebaseConfig';

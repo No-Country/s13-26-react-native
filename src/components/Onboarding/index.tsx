@@ -4,10 +4,14 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { example1, example2, example3 } from '../../assets';
 import Boton from '@/ui/Boton';
 import {styles} from './styles' 
+import { useRouter } from 'expo-router';
 
 const Onboarding = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef(null);
+
+  const router = useRouter();
+
   const carouselData = [
     { text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit repellendus a architecto accusantium deserunt ipsam necessitatibus vel iusto facere ', image: example1 },
     { text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit repellendus a architecto accusantium deserunt ipsam necessitatibus vel iusto facere ', image: example2 },
@@ -20,7 +24,9 @@ const Onboarding = () => {
     }
   };
 
-  const handleSkipOnboarding = () => { };
+  const handleSkipOnboarding = () => { 
+    router.replace('homescreen');
+  };
 
   const renderItem = ({ item }) => (
     <View style={styles.slide}>

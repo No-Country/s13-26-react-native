@@ -42,7 +42,6 @@ export const styles = StyleSheet.create({
   },
   button2text: {
     color: '#1D1D1B',
-    marginBottom: 10,
     marginRight: -20,
   },
   paginationContainer: {
