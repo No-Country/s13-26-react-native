@@ -7,7 +7,7 @@ import { useRouter } from 'expo-router';
 
 function HomeScreen() {
   const router = useRouter();
-  const [username, setUsername] = useState('Ana');
+  const [username, setUsername] = useState('Francisca');
   const [hours, setHours] = useState(0);
   return (
     <View style={style.container}>
