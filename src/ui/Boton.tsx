@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, Pressable } from 'react-native';
+import { Text, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
 
 interface props {
   onPress: () => any;
@@ -11,9 +11,9 @@ interface props {
 export default function Boton(props: props) {
   const { onPress, title = 'Guardar' } = props;
   return (
-    <Pressable style={[styles.button, props.styles ? props.styles : {}]} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, props.styles ? props.styles : {}]} onPress={onPress}>
       <Text style={[styles.text, props.textStyles ? props.textStyles : styles.text]}>{title}</Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 

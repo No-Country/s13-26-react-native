@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
-import Onboarding from '@/components/Onboarding'
+import { View, Text } from 'react-native';
+
+import { Stack } from 'expo-router';
 
 export const InitialLayout = () => {
   return (
-    <>
-      <Onboarding />
-    </>
-  )
-}
+    <Stack>
+      <Stack.Screen name="initialLogin" />
+    </Stack>
+  );
+};

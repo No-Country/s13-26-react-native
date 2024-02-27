@@ -3,21 +3,20 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingTop: 0,
+    paddingVertical: 21,
+    paddingHorizontal: 16,
+    marginTop: '45%',
   },
   slide: {
-    flex: 1,
-    marginTop: 100,
     alignItems: 'center',
-    marginBottom: 50,
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
+    alignSelf: 'flex-end',
     alignItems: 'flex-end',
+    marginRight: 25,
+    marginBottom: 35,
   },
   title: {
     fontSize: 24,
@@ -29,10 +28,10 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
     marginTop: 30,
+    fontFamily: 'montserrat_regular',
   },
   button1: {
-    backgroundColor: '#1D1D1B',
-    marginBottom: 10,
+    marginBottom: 8,
   },
   button1text: {
     fontSize: 18,
@@ -45,8 +44,8 @@ export const styles = StyleSheet.create({
     marginRight: -20,
   },
   paginationContainer: {
-    bottom: 50,
     position: 'absolute',
+    bottom: '8%',
   },
   dot: {
     width: 10,
