@@ -1,22 +1,22 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingVertical: 21,
-    paddingHorizontal: 16,
-    marginTop: '45%',
   },
   slide: {
+    marginTop: 20,
+    justifyContent: 'center',
     alignItems: 'center',
+    width: width,
   },
   buttonContainer: {
     alignSelf: 'flex-end',
     alignItems: 'flex-end',
-    marginRight: 25,
-    marginBottom: 35,
+    marginRight: 35,
+    marginBottom: 46,
   },
   title: {
     fontSize: 24,
@@ -26,12 +26,14 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 20,
     marginTop: 30,
     fontFamily: 'montserrat_regular',
+    paddingHorizontal: 47,
   },
   button1: {
-    marginBottom: 8,
+    position: 'absolute',
+    top: '92.2%',
+    right: '9.3%',
   },
   button1text: {
     fontSize: 18,
@@ -55,10 +57,16 @@ export const styles = StyleSheet.create({
     marginBottom: 130,
   },
   image: {
-    width: 300,
-    height: 200,
+    width: 320,
+    height: 250,
     marginBottom: 10,
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: 'gray',
+    objectFit: 'contain',
+  },
+  swipercontainer: {
+    height: 200,
+    width: '100vw',
+    backgroundColor: 'gray',
   },
 });

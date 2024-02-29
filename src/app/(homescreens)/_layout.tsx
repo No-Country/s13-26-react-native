@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router/tabs';
-import { Octicons, Feather, FontAwesome5 } from '@expo/vector-icons';
+import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import { Image } from 'react-native';
 
 export default function AppLayout() {
@@ -38,7 +38,7 @@ export default function AppLayout() {
         options={{
           title: 'Ajustes',
           tabBarIcon: ({ focused }) => (
-            <Octicons name="gear" size={26} color={focused ? 'black' : '#6F6E6E'} />
+            <Feather name="sliders" size={26} color={focused ? 'black' : '#6F6E6E'} />
           ),
         }}
       />
