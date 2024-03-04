@@ -9,8 +9,8 @@ import { collection, getDocs } from 'firebase/firestore';
 import { Firestore_Db as db } from '@/components/auth/FirebaseConfig';
 
 function SectionScreen() {
-  const [data, setData] = useState<{ id: string, [key: string]: any }[]>([]);
-  const [loading, setLoading] = useState(true); 
+  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+  const [loading, setLoading] = useState(true);
   const { sectionScreen } = useLocalSearchParams();
   const router = useRouter();
 
@@ -19,7 +19,7 @@ function SectionScreen() {
       const ejerciciosRef = collection(db, 'exercises');
       const snapshot = await getDocs(ejerciciosRef);
       const ejercicios = [];
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         ejercicios.push({ id: doc.id, ...doc.data() });
       });
       setData(ejercicios);
@@ -32,7 +32,7 @@ function SectionScreen() {
     <View style={style.container}>
       <Text style={style.textgreet}>Ejercicios {sectionScreen}</Text>
       <ScrollView contentContainerStyle={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-        {loading ? ( 
+        {loading ? (
           <View style={style.loadingContainer}>
             <ActivityIndicator size="large" color="black" />
             <Text style={style.loadingText}>Cargando...</Text>
@@ -40,11 +40,18 @@ function SectionScreen() {
         ) : (
           <FlashList
             data={data}
-            renderItem={({ item }) => <EjercicioComponente title={item?.titulo} url={item?.url} onClick={() => (router.push({ pathname: `/homeScreen/specificVideo/${item?.id}`, params: item }))}></EjercicioComponente>}
+            renderItem={({ item }) => (
+              <EjercicioComponente
+                title={item?.titulo}
+                url={item?.url}
+                onClick={() =>
+                  router.push({ pathname: `/homeScreen/specificVideo/${item?.id}`, params: item })
+                }
+              ></EjercicioComponente>
+            )}
             estimatedItemSize={111}
           />
         )}
-
       </ScrollView>
     </View>
   );

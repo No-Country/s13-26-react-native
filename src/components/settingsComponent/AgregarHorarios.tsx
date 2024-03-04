@@ -17,7 +17,7 @@ export const AgregarHorarios = () => {
       setSelectedDays([...selectedDays, day]);
     }
   };
-
+  
   const renderChips = () => {
     return chipText.map((text, index) => (
       <Chip key={index} text={text[0]} onPress={() => toggleDay(text)} />

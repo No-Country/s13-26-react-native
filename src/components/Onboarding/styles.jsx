@@ -1,23 +1,22 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingTop: 0,
   },
   slide: {
-    flex: 1,
-    marginTop: 100,
+    marginTop: 20,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 50,
+    width: width,
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
+    alignSelf: 'flex-end',
     alignItems: 'flex-end',
+    marginRight: 35,
+    marginBottom: 46,
   },
   title: {
     fontSize: 24,
@@ -27,12 +26,14 @@ export const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textAlign: 'center',
-    marginBottom: 20,
     marginTop: 30,
+    fontFamily: 'montserrat_regular',
+    paddingHorizontal: 47,
   },
   button1: {
-    backgroundColor: '#1D1D1B',
-    marginBottom: 10,
+    position: 'absolute',
+    top: '92.2%',
+    right: '9.3%',
   },
   button1text: {
     fontSize: 18,
@@ -45,8 +46,8 @@ export const styles = StyleSheet.create({
     marginRight: -20,
   },
   paginationContainer: {
-    bottom: 50,
     position: 'absolute',
+    bottom: '8%',
   },
   dot: {
     width: 10,
@@ -56,10 +57,16 @@ export const styles = StyleSheet.create({
     marginBottom: 130,
   },
   image: {
-    width: 300,
-    height: 200,
+    width: 320,
+    height: 250,
     marginBottom: 10,
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: 'gray',
+    objectFit: 'contain',
+  },
+  swipercontainer: {
+    height: 200,
+    width: '100vw',
+    backgroundColor: 'gray',
   },
 });

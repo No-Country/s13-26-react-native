@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Image } from "react-native";
 import { encode } from "base-64";
 
 export const CloudinaryServices = ({folder}) => {

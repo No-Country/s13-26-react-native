@@ -13,17 +13,19 @@ function EjercicioComponente({ title = 'falta', url, onClick }) {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'row',
-            gap: 33,
+            gap: 30,
           }}
         >
           <View
             style={{
               height: '100%',
               flex: 1,
-              backgroundColor: '#D9D9D9',
             }}
           >
-            <Image source={{ uri: url }} style={{ width: '100%', height: '100%' }}/>
+            <Image
+              source={{ uri: url }}
+              style={{ width: '100%', height: '100%', borderRadius: 10 }}
+            />
           </View>
           <View
             style={{

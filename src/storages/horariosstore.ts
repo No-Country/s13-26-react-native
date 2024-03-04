@@ -1,6 +1,5 @@
 import {create} from 'zustand';
 
-// Define el tipo de estado
 interface HorariosState {
   selectedDays: string[];
   selectedStartTime: string;
@@ -10,7 +9,6 @@ interface HorariosState {
   setSelectedEndTime: (time: string) => void;
 }
 
-// Define el store
 const useHorariosStore = create<HorariosState>((set) => ({
   selectedDays: [],
   selectedStartTime: '',

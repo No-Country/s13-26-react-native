@@ -3,12 +3,19 @@ import { useState } from 'react';
 import Boton from '../../ui/Boton';
 import { Feather } from '@expo/vector-icons';
 import OpcionHome, { GridHome, Col, Row } from '@/ui/OpcionHome';
-import { useRouter } from 'expo-router';
+import { useRouter, Redirect } from 'expo-router';
+import Onboarding from '@/components/Onboarding';
+import { useOnboarding } from '@/storages/authstore';
 
 function HomeScreen() {
   const router = useRouter();
-  const [username, setUsername] = useState('Ana');
+  const [username, setUsername] = useState('Francisca');
   const [hours, setHours] = useState(0);
+  const onboarding = useOnboarding((state) => state.onboarding);
+
+  if (onboarding) {
+    return <Redirect href={'../../initialLogin'}></Redirect>;
+  }
   return (
     <View style={style.container}>
       <View style={style.textcontainer}>
