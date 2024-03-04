@@ -127,7 +127,7 @@ const Auth = () => {
 
       <View>
         <Text style={{ fontFamily: 'montserrat_regular' }}>Aun no tienes una cuenta?</Text>
-        <Link push href={'/registerScreen'}>
+        <Link push href={'/registerscreen'}>
           <Text style={{ fontWeight: 'bold', fontFamily: 'montserrat_semibold' }}>Registrarse</Text>
         </Link>
       </View>
