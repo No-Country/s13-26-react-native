@@ -6,6 +6,7 @@ import OpcionHome, { GridHome, Col, Row } from '@/ui/OpcionHome';
 import { useRouter, Redirect } from 'expo-router';
 import Onboarding from '@/components/Onboarding';
 import { useOnboarding } from '@/storages/authstore';
+
 function HomeScreen() {
   const router = useRouter();
   const [username, setUsername] = useState('Francisca');

@@ -25,7 +25,7 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="statsScreen"
+        name="statsscreen"
         options={{
           title: 'Historial',
           tabBarIcon: ({ focused }) => (
@@ -43,7 +43,7 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="profileScreen"
+        name="profilescreen"
         options={{
           title: 'Perfil',
           tabBarIcon: ({ focused }) => (

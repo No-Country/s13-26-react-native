@@ -18,7 +18,7 @@ export default function Layout() {
         }}
       />
       <Stack.Screen
-        name="registerScreen"
+        name="registerscreen"
         options={{
           headerShown: false,
           gestureEnabled: true,
