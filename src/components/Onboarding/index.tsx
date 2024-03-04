@@ -27,7 +27,8 @@ const Onboarding = () => {
       <SwiperFlatListWithGestureHandler
         index={0}
         showPagination
-        paginationActiveColor={'black'}
+        paginationStyleItemInactive={{ backgroundColor: '#0AD2DB' }}
+        paginationActiveColor={'#09A4B7'}
         paginationStyle={{ position: 'absolute', top: '90%' }}
         paginationStyleItem={{ borderRadius: 6, width: 12, height: 12 }}
       >
@@ -44,10 +45,9 @@ const Onboarding = () => {
         <View style={styles.slide}>
           <Image source={example2} style={styles.image} />
           <Text style={styles.text}>
-            {' '}
             Personaliza tu experiencia añadiendo tus horarios frente a la pantalla.
           </Text>
-          <Text style={styles.text}>Esto nos permite ofrecerte pausas en momentos ideales. </Text>
+          <Text style={styles.text}>Esto nos permite ofrecerte pausas en momentos ideales.</Text>
         </View>
         <View style={styles.slide}>
           <Image source={example3} style={styles.image} />
@@ -57,12 +57,7 @@ const Onboarding = () => {
           <Text style={[{ ...styles.text }, { fontFamily: 'montserrat_semibold' }]}>
             ¡Comienza ahora y haz un Paréntesis!
           </Text>
-          <Boton
-            onPress={handleNext}
-            title="Siguiente"
-            styles={styles.button1}
-            textStyles={styles.button1text}
-          />
+          <Boton onPress={handleNext} title="Siguiente" styles={styles.button1} />
         </View>
       </SwiperFlatListWithGestureHandler>
       <View style={styles.buttonContainer}>

@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     alignItems: 'flex-end',
     marginRight: 35,
-    marginBottom: 46,
+    marginBottom: 48,
   },
   title: {
     fontSize: 24,
@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    color: '#102B3F',
     textAlign: 'center',
     marginTop: 30,
     fontFamily: 'montserrat_regular',
@@ -35,15 +36,12 @@ export const styles = StyleSheet.create({
     top: '92.2%',
     right: '9.3%',
   },
-  button1text: {
-    fontSize: 18,
-  },
   button2: {
     backgroundColor: 'transparent',
   },
   button2text: {
-    color: '#1D1D1B',
-    marginRight: -20,
+    color: '#2E698C',
+    marginRight: -19,
   },
   paginationContainer: {
     position: 'absolute',

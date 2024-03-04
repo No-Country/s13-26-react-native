@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Boton from '@/ui/Boton';
 import { useRouter, Redirect } from 'expo-router';
 import { useOnboarding } from '@/storages/authstore';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const ConfigTime = () => {
   const [isSelected, setSelection] = useState(false);
@@ -11,7 +10,7 @@ const ConfigTime = () => {
   const router = useRouter();
 
   const handleNext = () => {
-    router.replace('./configNots');
+    router.push('./configNots');
   };
 
   return (
@@ -23,7 +22,7 @@ const ConfigTime = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
           <View
@@ -31,7 +30,7 @@ const ConfigTime = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
           <View
@@ -39,7 +38,7 @@ const ConfigTime = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'black',
+              backgroundColor: '#09A4B7',
             }}
           ></View>
           <View
@@ -47,7 +46,7 @@ const ConfigTime = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
         </View>
@@ -56,18 +55,14 @@ const ConfigTime = () => {
         <View style={{ display: 'flex', flexDirection: 'row', gap: 14 }}></View>
       </View>
       <View style={styles.buttonContainer}>
-        <Boton
-          onPress={handleNext}
-          title="Siguiente"
-          styles={styles.button1}
-          textStyles={styles.button1text}
-        />
+        <Boton onPress={handleNext} title="Siguiente" styles={styles.button1} />
       </View>
     </>
   );
 };
 
 export default ConfigTime;
+
 const styles = StyleSheet.create({
   container: {
     flex: 5,
@@ -85,12 +80,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontFamily: 'montserrat_semibold',
-    marginBottom: 150,
+    marginBottom: 120,
     textAlign: 'center',
+    color: '#102B3F',
   },
   text: {
     marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 50,
     fontSize: 14,
     textAlign: 'center',
     fontFamily: 'montserrat_regular',
@@ -99,15 +95,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     fontFamily: 'montserrat_regular',
+    color: 'white',
   },
   button1: {
     position: 'absolute',
     top: '-2%',
     right: '9.3%',
   },
-  button1text: {
-    fontSize: 18,
-  },
+
   checkboxContainer: {
     marginTop: 70,
     flexDirection: 'row',
