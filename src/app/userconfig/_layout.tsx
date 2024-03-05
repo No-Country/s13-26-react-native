@@ -11,8 +11,10 @@ function Layout() {
       screenOptions={{
         headerShown: false,
         headerBackVisible: true,
+        gestureEnabled: true,
       }}
     >
+      <Stack.Screen name="index" options={{ gestureEnabled: true }} />
       <Stack.Screen name="configAgeScreen" options={{ gestureEnabled: true }} />
       <Stack.Screen name="configTime" options={{ gestureEnabled: true }} />
       <Stack.Screen name="configNots" options={{ gestureEnabled: true }} />

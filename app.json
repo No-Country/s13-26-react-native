@@ -13,6 +13,14 @@
         {
           "origin": "https://n"
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./src/assets/icons/logo.png",
+          "color": "#ffffff",
+          "sounds": ["./src/assets/resources/tone.wav"]
+        }
       ]
     ],
     "name": "s13-26-react-native",

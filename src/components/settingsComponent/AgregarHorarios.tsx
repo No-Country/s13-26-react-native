@@ -6,7 +6,14 @@ import { Chip } from '@/ui/Chip';
 import useHorariosStore from '@/storages/horariosstore';
 
 export const AgregarHorarios = () => {
-  const { selectedDays, selectedStartTime, selectedEndTime, setSelectedDays, setSelectedStartTime, setSelectedEndTime } = useHorariosStore();
+  const {
+    selectedDays,
+    selectedStartTime,
+    selectedEndTime,
+    setSelectedDays,
+    setSelectedStartTime,
+    setSelectedEndTime,
+  } = useHorariosStore();
 
   const chipText = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
@@ -17,7 +24,7 @@ export const AgregarHorarios = () => {
       setSelectedDays([...selectedDays, day]);
     }
   };
-  
+
   const renderChips = () => {
     return chipText.map((text, index) => (
       <Chip key={index} text={text[0]} onPress={() => toggleDay(text)} />
@@ -62,27 +69,28 @@ export const AgregarHorarios = () => {
   return (
     <View>
       <View style={{ alignItems: 'center', marginTop: 30 }}>
-        <Text style={{ fontSize: 16 }}>Configura el horario que estás frente a la pantalla</Text>
+        <Text style={{ fontSize: 16, fontFamily: 'montserrat_regular' }}>
+          Configura el horario que estás frente a la pantalla
+        </Text>
       </View>
 
-      <View style={{ marginTop: 30, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+      <View
+        style={{ marginTop: 30, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}
+      >
         {renderChips()}
       </View>
 
       <View style={styles.inputContainer}>
         <TouchableOpacity onPress={showStartTimePicker}>
-          <Text>Comienzo</Text>
+          <Text style={{ fontFamily: 'montserrat_regular' }}>Comienzo</Text>
           <View style={styles.input}>
             <FontAwesome5 name="clock" size={24} color="black" />
-            <TextInput
-              value={selectedStartTime}
-              editable={false}
-              style={styles.textInput}
-            />
+            <TextInput value={selectedStartTime} editable={false} style={styles.textInput} />
           </View>
         </TouchableOpacity>
         {isStartTimePickerVisible && (
           <DateTimePicker
+            style={{ position: 'absolute', backgroundColor: 'white', borderRadius: 10, zIndex: 5 }}
             value={new Date()}
             mode="time"
             is24Hour={true}
@@ -92,18 +100,15 @@ export const AgregarHorarios = () => {
         )}
 
         <TouchableOpacity onPress={showEndTimePicker}>
-          <Text>Finalización</Text>
+          <Text style={{ fontFamily: 'montserrat_regular' }}>Finalización</Text>
           <View style={styles.input}>
             <FontAwesome5 name="clock" size={24} color="black" />
-            <TextInput
-              value={selectedEndTime}
-              editable={false}
-              style={styles.textInput}
-            />
+            <TextInput value={selectedEndTime} editable={false} style={styles.textInput} />
           </View>
         </TouchableOpacity>
         {isEndTimePickerVisible && (
           <DateTimePicker
+            style={{ position: 'absolute', backgroundColor: 'white', borderRadius: 10, zIndex: 5 }}
             value={new Date()}
             mode="time"
             is24Hour={true}
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   input: {
     borderWidth: 1,
@@ -135,10 +140,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    zIndex: 0,
   },
   textInput: {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
 });

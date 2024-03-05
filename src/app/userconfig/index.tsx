@@ -12,7 +12,11 @@ const UserConfig = () => {
   const router = useRouter();
 
   const handleNext = () => {
-    router.replace('./configAgeScreen');
+    router.push('./configAgeScreen');
+  };
+
+  const handleSkip = () => {
+    router.replace('homeScreen');
   };
   useEffect(() => {
     if (isSelected) {
@@ -28,7 +32,7 @@ const UserConfig = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'black',
+              backgroundColor: '#09A4B7',
             }}
           ></View>
           <View
@@ -36,7 +40,7 @@ const UserConfig = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
           <View
@@ -44,7 +48,7 @@ const UserConfig = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
           <View
@@ -52,7 +56,7 @@ const UserConfig = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
         </View>
@@ -61,7 +65,7 @@ const UserConfig = () => {
         <View style={{ display: 'flex', flexDirection: 'row', gap: 14 }}>
           <TouchableOpacity
             style={{
-              backgroundColor: activeIndex == 1 ? '#808080' : '#D9D9D9',
+              backgroundColor: activeIndex == 1 ? '#102B3F' : '#09A4B7',
               borderRadius: 50,
               height: 100,
               width: 100,
@@ -77,7 +81,7 @@ const UserConfig = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              backgroundColor: activeIndex == 2 ? '#808080' : '#D9D9D9',
+              backgroundColor: activeIndex == 2 ? '#102B3F' : '#09A4B7',
               borderRadius: 50,
               height: 100,
               width: 100,
@@ -93,7 +97,7 @@ const UserConfig = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              backgroundColor: activeIndex == 3 ? '#808080' : '#D9D9D9',
+              backgroundColor: activeIndex == 3 ? '#102B3F' : '#09A4B7',
               borderRadius: 50,
               height: 100,
               width: 100,
@@ -111,10 +115,10 @@ const UserConfig = () => {
         <View style={styles.checkboxContainer}>
           <BouncyCheckbox
             size={22}
-            fillColor="black"
+            fillColor="#102B3F"
             unfillColor="white"
             text="Prefiero no decirlo"
-            iconStyle={{ borderColor: 'black', borderRadius: 4 }}
+            iconStyle={{ borderColor: '#102B3F', borderRadius: 4 }}
             innerIconStyle={{ borderWidth: 2, borderRadius: 4 }}
             textStyle={{
               fontFamily: 'montserrat_regular',
@@ -126,11 +130,12 @@ const UserConfig = () => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
+        <Boton onPress={handleNext} title="Siguiente" styles={styles.button1} />
         <Boton
-          onPress={handleNext}
-          title="Siguiente"
-          styles={styles.button1}
-          textStyles={styles.button1text}
+          onPress={handleSkip}
+          title="Saltar"
+          styles={{ backgroundColor: 'transparent', right: 18.3, top: 52.6 }}
+          textStyles={{ color: '#2E698C', fontSize: 13 }}
         />
       </View>
     </>
@@ -138,6 +143,7 @@ const UserConfig = () => {
 };
 
 export default UserConfig;
+
 const styles = StyleSheet.create({
   container: {
     flex: 5,
@@ -155,12 +161,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontFamily: 'montserrat_semibold',
-    marginBottom: 150,
+    marginBottom: 120,
     textAlign: 'center',
+    color: '#102B3F',
   },
   text: {
     marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 50,
     fontSize: 14,
     textAlign: 'center',
     fontFamily: 'montserrat_regular',
@@ -169,15 +176,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     fontFamily: 'montserrat_regular',
+    color: 'white',
   },
   button1: {
     position: 'absolute',
     top: '-2%',
     right: '9.3%',
   },
-  button1text: {
-    fontSize: 18,
-  },
+
   checkboxContainer: {
     marginTop: 70,
     flexDirection: 'row',

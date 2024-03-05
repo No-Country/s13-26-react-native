@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Boton from '@/ui/Boton';
 import { useRouter, Redirect } from 'expo-router';
-import { useOnboarding } from '@/storages/authstore';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import ScrollPicker from 'react-native-wheel-scrollview-picker';
 
+const age = [];
+for (let i = 15; i < 99; i++) {
+  age.push(i);
+}
 const ConfigAge = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
-  const setOnboarding = useOnboarding((state) => state.setOnboarding);
   const router = useRouter();
 
   const handleNext = () => {
-    router.replace('./configTime');
+    router.push('./configTime');
   };
-
+  const handleSkip = () => {
+    router.replace('homeScreen');
+  };
   return (
     <>
       <View style={styles.container}>
@@ -23,7 +27,7 @@ const ConfigAge = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
           <View
@@ -31,7 +35,7 @@ const ConfigAge = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'black',
+              backgroundColor: '#09A4B7',
             }}
           ></View>
           <View
@@ -39,7 +43,7 @@ const ConfigAge = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
           <View
@@ -47,20 +51,52 @@ const ConfigAge = () => {
               borderRadius: 6,
               width: 12,
               height: 12,
-              backgroundColor: 'grey',
+              backgroundColor: '#0AD2DB',
             }}
           ></View>
         </View>
         <Text style={styles.text}> </Text>
         <Text style={styles.title}>¿Cuál es tu edad?</Text>
-        <View style={{ display: 'flex', flexDirection: 'row', gap: 14 }}></View>
+        <View style={{ height: 270, bottom: 50 }}>
+          <ScrollPicker
+            dataSource={age}
+            selectedIndex={1}
+            renderItem={(data, index) => {
+              return (
+                <View
+                  style={{
+                    width: 100,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Text
+                    style={{ fontFamily: 'montserrat_semibold', fontSize: 22, color: '#09A4B7' }}
+                  >
+                    {data}
+                  </Text>
+                </View>
+              );
+            }}
+            onValueChange={(data, selectedIndex) => {
+              console.log(data);
+            }}
+            wrapperBackground="transparent"
+            wrapperHeight={120}
+            itemHeight={80}
+            highlightColor="#09A4B7"
+            highlightBorderWidth={2}
+          />
+        </View>
       </View>
       <View style={styles.buttonContainer}>
+        <Boton onPress={handleNext} title="Siguiente" styles={styles.button1} />
         <Boton
-          onPress={handleNext}
-          title="Siguiente"
-          styles={styles.button1}
-          textStyles={styles.button1text}
+          onPress={handleSkip}
+          title="Saltar"
+          styles={{ backgroundColor: 'transparent', right: 18.3, top: 52.6 }}
+          textStyles={{ color: '#2E698C', fontSize: 13 }}
         />
       </View>
     </>
@@ -68,6 +104,7 @@ const ConfigAge = () => {
 };
 
 export default ConfigAge;
+
 const styles = StyleSheet.create({
   container: {
     flex: 5,
@@ -85,12 +122,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontFamily: 'montserrat_semibold',
-    marginBottom: 150,
+    marginBottom: 120,
     textAlign: 'center',
+    color: '#102B3F',
   },
   text: {
     marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 50,
     fontSize: 14,
     textAlign: 'center',
     fontFamily: 'montserrat_regular',
@@ -99,15 +137,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center',
     fontFamily: 'montserrat_regular',
+    color: 'white',
   },
   button1: {
     position: 'absolute',
     top: '-2%',
     right: '9.3%',
   },
-  button1text: {
-    fontSize: 18,
-  },
+
   checkboxContainer: {
     marginTop: 70,
     flexDirection: 'row',
