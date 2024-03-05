@@ -1,19 +1,10 @@
-import { Firebase_Auth, Firestore_Db } from '@/components/auth/FirebaseConfig';
-import { query, collection, getDocs, where, doc, deleteDoc, getDoc, updateDoc } from 'firebase/firestore';
-
-const actualUser = async () => {
-  const user = Firebase_Auth.currentUser;
-  const uid = user.uid;
-
-  const q = query(collection(Firestore_Db, 'users'), where('id', '==', uid));
-  const querySnapshot = await getDocs(q);
-
-  return querySnapshot
-}
+import { Firestore_Db } from '@/components/auth/FirebaseConfig';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { UserData } from './UserData';
 
 export const obtenerHorariosUsuario = async () => {
   try {
-    const querySnapshot = await actualUser();
+    const querySnapshot = await UserData();
 
     if (!querySnapshot.empty) {
       const userData = querySnapshot.docs[0].data();
@@ -32,7 +23,7 @@ export const obtenerHorariosUsuario = async () => {
 
 export const eliminarHorario = async (horarioId) => {
   try {
-    const querySnapshot = await actualUser();
+    const querySnapshot = await UserData();
 
     const getId = querySnapshot.docs[0].id;
 
@@ -67,7 +58,7 @@ export const eliminarHorario = async (horarioId) => {
 };
 
 export const guardarHorariosUsuario = async (selectedDays, selectedStartTime, selectedEndTime) => {
-  const querySnapshot = await actualUser();
+  const querySnapshot = await UserData();
 
   const userIds = querySnapshot.docs.map((doc) => doc.id);
   const userId = userIds[0];

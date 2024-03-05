@@ -1,17 +1,30 @@
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
-import { useState } from 'react';
-import Boton from '../../ui/Boton';
+import { useState, useEffect } from 'react';
+import { Text, View, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import OpcionHome, { GridHome, Col, Row } from '@/ui/OpcionHome';
 import { useRouter, Redirect } from 'expo-router';
-import Onboarding from '@/components/Onboarding';
 import { useOnboarding } from '@/storages/authstore';
+import { tomarTotalMedallas } from '@/services/MedalsServices';
+import { UserInformation } from '@/services/UserData';
 
 function HomeScreen() {
   const router = useRouter();
-  const [username, setUsername] = useState('Francisca');
+  const [username, setUsername] = useState('Cargando...');
   const [hours, setHours] = useState(4);
+  const [medallas, setMedallas] = useState(0)
   const onboarding = useOnboarding((state) => state.onboarding);
+
+  useEffect(() => {
+    async function fetchMedallas() {
+      const totalMedallas = await tomarTotalMedallas();
+      const getUsername = await UserInformation()
+
+      setMedallas(totalMedallas);
+      setUsername(getUsername?.name)
+    }
+    fetchMedallas();
+  }, [])
+  
 
   if (onboarding) {
     return <Redirect href={'../../initialLogin'}></Redirect>;
@@ -29,7 +42,7 @@ function HomeScreen() {
         <View style={{ display: 'flex', flexDirection: 'row', gap: 3, bottom: 14 }}>
           <Feather name="award" size={24} color={'#F78764'} style={{ alignSelf: 'flex-end' }} />
           <Text style={{ fontFamily: 'montserrat_semibold', fontSize: 16, color: '#6F6E6E' }}>
-            2
+            {medallas}
           </Text>
         </View>
       </View>
