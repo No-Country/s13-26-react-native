@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
+import { sumarMedalla } from '@/services/MedalsServices';
 
 function SpecificVideo() {
   const specificVideo = useLocalSearchParams();
@@ -46,7 +47,7 @@ function SpecificVideo() {
           {specificVideo.descripcion}
         </Text>
       </View>
-      <TouchableOpacity style={style.containerStopwatch}>
+      <TouchableOpacity style={style.containerStopwatch} onPress={sumarMedalla}>
         <MaterialCommunityIcons name="clock-time-five-outline" size={100} color="black" />
         <View style={style.controllerPlay}>
           <Entypo name="controller-play" size={24} color="black" />

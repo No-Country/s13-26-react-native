@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
+import { Feather } from '@expo/vector-icons';
 
 export default function StatsPage() {
   const getWeekdayName = (index) => {
@@ -22,18 +23,22 @@ export default function StatsPage() {
 
   return (
     <View style={styles.container}>
-      <Text>Por cada pausa que completes ganas 1 medalla.</Text>
+      <View style={{alignItems: 'center'}}>
+        <Feather name="award" size={25} color='#F78764' />
+        <Text style={{fontSize: 20, fontWeight: '500'}}>Mi Progreso</Text>
+        <Text>Por cada pausa que completes ganas 1 medalla.</Text>
+      </View>
 
-      <View style={{ width: '100%' }}>
-        <Text>Tienes 0 medallas</Text>
-        <Text>¡Vamos por más!</Text>
+      <View style={{ backgroundColor: '#09A4B7', width: '100%', justifyContent: 'center', alignItems: 'center', paddingVertical: 14, borderRadius: 10, marginTop: 20 }}>
+        <Text style={{color: 'white', fontSize: 16, fontWeight: '500'}}>Tienes 0 medallas</Text>
+        <Text style={{color: 'white', marginTop: 8}}>¡Vamos por más!</Text>
       </View>
 
       <View style={styles.carouselContainer}>
         <Text>Mi progreso diario</Text>
         <SwiperFlatList
           style={styles.swiper}
-          data={[...Array(30).keys()]}
+          data={[...Array(10).keys()]}
           renderItem={({ item }) => (
             <View style={styles.dayContainer}>
               <Text>{getWeekdayName(item)}</Text>
@@ -65,6 +70,7 @@ const styles = StyleSheet.create({
   },
   swiper: {
     width: '100%',
+    // backgroundColor: 'blue'
   },
   dayContainer: {
     width: 50,
