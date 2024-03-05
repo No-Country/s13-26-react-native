@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export const Chip = ({ text, onPress }: { text: string, onPress?: () => void }) => {
+export const Chip = ({ text, onPress }: { text: string; onPress?: () => void }) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handlePress = () => {
     setIsPressed(!isPressed);
     onPress && onPress();
-  }
+  };
 
   return (
     <TouchableOpacity onPress={handlePress}>
-      <View style={[styles.container, { backgroundColor: isPressed ? 'gray' : 'lightgray' }]}>
-        <Text style={[styles.chipText, { color: isPressed ? 'white' : 'black' }]}>{text}</Text>
+      <View style={[styles.container, { backgroundColor: isPressed ? '#67397E' : '#8D6A9F' }]}>
+        <Text style={[styles.chipText, { color: 'white' }]}>{text}</Text>
       </View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -26,10 +26,11 @@ const styles = StyleSheet.create({
     height: 45,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 100
+    borderRadius: 100,
   },
   chipText: {
+    fontFamily: 'montserrat_semibold',
     fontSize: 22,
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+});

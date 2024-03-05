@@ -19,7 +19,7 @@ export default function Boton(props: props) {
 
 const styles = StyleSheet.create({
   button: {
-    height: 40,
+    height: 46,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,

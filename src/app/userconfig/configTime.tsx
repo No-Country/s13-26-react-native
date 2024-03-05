@@ -3,7 +3,8 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Boton from '@/ui/Boton';
 import { useRouter, Redirect } from 'expo-router';
 import { useOnboarding } from '@/storages/authstore';
-
+import { AgregarHorariosConfig } from '@/components/settingsComponent/AgregarHorarios';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 const ConfigTime = () => {
   const [isSelected, setSelection] = useState(false);
   const setOnboarding = useOnboarding((state) => state.setOnboarding);
@@ -54,7 +55,25 @@ const ConfigTime = () => {
         </View>
         <Text style={styles.text}> </Text>
         <Text style={styles.title}>Cuales son tus horarios frente a la pantalla?</Text>
-        <View style={{ display: 'flex', flexDirection: 'row', gap: 14 }}></View>
+        <View style={{ display: 'flex', flexDirection: 'row', gap: 14 }}>
+          <AgregarHorariosConfig />
+        </View>
+        <View style={styles.checkboxContainer}>
+          <BouncyCheckbox
+            size={22}
+            fillColor="#102B3F"
+            unfillColor="white"
+            text="Tengo horarios distintos"
+            iconStyle={{ borderColor: '#102B3F', borderRadius: 4 }}
+            innerIconStyle={{ borderWidth: 2, borderRadius: 4 }}
+            textStyle={{
+              fontFamily: 'montserrat_regular',
+              textDecorationLine: 'none',
+              color: 'black',
+            }}
+            onPress={(isChecked) => setSelection(isChecked)}
+          />
+        </View>
       </View>
       <View style={styles.buttonContainer}>
         <Boton onPress={handleNext} title="Siguiente" styles={styles.button1} />
@@ -88,7 +107,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontFamily: 'montserrat_semibold',
-    marginBottom: 120,
+    marginBottom: 60,
     textAlign: 'center',
     color: '#102B3F',
   },
