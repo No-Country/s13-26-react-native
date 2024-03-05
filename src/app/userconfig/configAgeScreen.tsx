@@ -15,7 +15,9 @@ const ConfigAge = () => {
   const handleNext = () => {
     router.push('./configTime');
   };
-
+  const handleSkip = () => {
+    router.replace('homeScreen');
+  };
   return (
     <>
       <View style={styles.container}>
@@ -90,6 +92,12 @@ const ConfigAge = () => {
       </View>
       <View style={styles.buttonContainer}>
         <Boton onPress={handleNext} title="Siguiente" styles={styles.button1} />
+        <Boton
+          onPress={handleSkip}
+          title="Saltar"
+          styles={{ backgroundColor: 'transparent', right: 18.3, top: 52.6 }}
+          textStyles={{ color: '#2E698C', fontSize: 13 }}
+        />
       </View>
     </>
   );

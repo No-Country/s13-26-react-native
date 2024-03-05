@@ -94,7 +94,9 @@ const ConfigNots = () => {
       Notifications.removeNotificationSubscription(responseListener.current);
     };
   };
-
+  const handleSkip = () => {
+    router.replace('homeScreen');
+  };
   return (
     <>
       <View style={styles.container}>
@@ -143,6 +145,12 @@ const ConfigNots = () => {
       </View>
       <View style={styles.buttonContainer}>
         <Boton onPress={handleNots} title="Permitir ahora" styles={styles.button1} />
+        <Boton
+          onPress={handleSkip}
+          title="Más tarde"
+          styles={{ backgroundColor: 'transparent', right: 18.3, top: 52.6 }}
+          textStyles={{ color: '#2E698C', fontSize: 13 }}
+        />
       </View>
     </>
   );

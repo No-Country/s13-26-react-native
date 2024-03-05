@@ -10,7 +10,7 @@ import { useOnboarding } from '@/storages/authstore';
 function HomeScreen() {
   const router = useRouter();
   const [username, setUsername] = useState('Francisca');
-  const [hours, setHours] = useState(0);
+  const [hours, setHours] = useState(4);
   const onboarding = useOnboarding((state) => state.onboarding);
 
   if (onboarding) {
@@ -27,9 +27,9 @@ function HomeScreen() {
           la pantalla!
         </Text>
         <View style={{ display: 'flex', flexDirection: 'row', gap: 3, bottom: 14 }}>
-          <Feather name="award" size={24} color={'#6F6E6E'} style={{ alignSelf: 'flex-end' }} />
+          <Feather name="award" size={24} color={'#F78764'} style={{ alignSelf: 'flex-end' }} />
           <Text style={{ fontFamily: 'montserrat_semibold', fontSize: 16, color: '#6F6E6E' }}>
-            10
+            2
           </Text>
         </View>
       </View>
@@ -98,17 +98,20 @@ const style = StyleSheet.create({
     textAlign: 'left',
     fontFamily: 'montserrat_semibold',
     fontSize: 16,
+    color: '#102B3F',
   },
   textstat: {
     textAlign: 'left',
     fontFamily: 'montserrat_regular',
     fontSize: 13,
+    color: '#646F77',
   },
   textquestion: {
     textAlign: 'left',
     fontFamily: 'montserrat_regular',
     fontSize: 13,
     marginBottom: 18,
+    color: '#646F77',
   },
 });
 

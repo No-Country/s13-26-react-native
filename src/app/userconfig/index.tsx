@@ -14,6 +14,10 @@ const UserConfig = () => {
   const handleNext = () => {
     router.push('./configAgeScreen');
   };
+
+  const handleSkip = () => {
+    router.replace('homeScreen');
+  };
   useEffect(() => {
     if (isSelected) {
       setActiveIndex(null);
@@ -127,6 +131,12 @@ const UserConfig = () => {
       </View>
       <View style={styles.buttonContainer}>
         <Boton onPress={handleNext} title="Siguiente" styles={styles.button1} />
+        <Boton
+          onPress={handleSkip}
+          title="Saltar"
+          styles={{ backgroundColor: 'transparent', right: 18.3, top: 52.6 }}
+          textStyles={{ color: '#2E698C', fontSize: 13 }}
+        />
       </View>
     </>
   );

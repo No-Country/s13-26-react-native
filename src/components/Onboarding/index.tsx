@@ -14,12 +14,12 @@ const Onboarding = () => {
 
   const handleNext = () => {
     setOnboarding(false);
-    router.replace('userconfig');
+    router.push('userconfig');
   };
 
   const handleSkipOnboarding = () => {
     setOnboarding(false);
-    router.replace('userconfig');
+    router.push('userconfig');
   };
 
   return (
