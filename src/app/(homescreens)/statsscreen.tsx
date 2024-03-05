@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import { Feather } from '@expo/vector-icons';
+import { tomarTotalMedallas } from '@/services/MedalsServices';
 
 export default function StatsPage() {
+  const [medallas, setMedallas] = useState(0);
+
+  useEffect(() => {
+    async function fetchMedallas() {
+      const totalMedallas = await tomarTotalMedallas();
+      setMedallas(totalMedallas);
+    }
+    fetchMedallas();
+  }, []);
+
   const getWeekdayName = (index) => {
     const weekdays = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
     const todayIndex = new Date().getDay();
@@ -23,19 +34,19 @@ export default function StatsPage() {
 
   return (
     <View style={styles.container}>
-      <View style={{alignItems: 'center'}}>
+      <View style={{ alignItems: 'center' }}>
         <Feather name="award" size={25} color='#F78764' />
-        <Text style={{fontSize: 20, fontWeight: '500'}}>Mi Progreso</Text>
+        <Text style={{ fontSize: 20, fontWeight: '500' }}>Mi Progreso</Text>
         <Text>Por cada pausa que completes ganas 1 medalla.</Text>
       </View>
 
       <View style={{ backgroundColor: '#09A4B7', width: '100%', justifyContent: 'center', alignItems: 'center', paddingVertical: 14, borderRadius: 10, marginTop: 20 }}>
-        <Text style={{color: 'white', fontSize: 16, fontWeight: '500'}}>Tienes 0 medallas</Text>
-        <Text style={{color: 'white', marginTop: 8}}>¡Vamos por más!</Text>
+        <Text style={{ color: 'white', fontSize: 16, fontWeight: '500' }}>Tienes {medallas} medallas</Text>
+        <Text style={{ color: 'white', marginTop: 8 }}>¡Vamos por más!</Text>
       </View>
 
       <View style={styles.carouselContainer}>
-        <Text>Mi progreso diario</Text>
+        <Text style={{ fontSize: 20, fontWeight: '500' }}>Mi progreso diario</Text>
         <SwiperFlatList
           style={styles.swiper}
           data={[...Array(10).keys()]}
