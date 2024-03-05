@@ -48,8 +48,7 @@ export const sumarMedalla = async () => {
   }
 };
 
-
-export const tomarMedallasPorFecha = async (fecha) => {
+export const tomarMedallasPorFecha = async () => {
   const querySnapshot = await UserData();
 
   const userIds = querySnapshot.docs.map((doc) => doc.id);
@@ -62,14 +61,14 @@ export const tomarMedallasPorFecha = async (fecha) => {
     if (userDocSnapshot.exists()) {
       const userDocData = userDocSnapshot.data();
       const medallas = userDocData.medallas || {};
-      return medallas[fecha] || 0;
+      return medallas;
     } else {
       console.error('El documento del usuario no existe.');
-      return 0;
+      return {};
     }
   } catch (error) {
     console.error('Error al tomar las medallas por fecha:', error);
-    return 0;
+    return {};
   }
 };
 
