@@ -26,6 +26,7 @@ function SpecificVideo() {
           source={{
             uri: specificVideo.url,
           }}
+          resizeMode="contain"
         />
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           <MaterialCommunityIcons name="clock-time-five-outline" size={22} color="black" />
@@ -72,6 +73,8 @@ const style = StyleSheet.create({
   },
   containerImg: {
     alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 10
   },
   img: {
     width: 220,

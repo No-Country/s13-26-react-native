@@ -215,7 +215,7 @@ const Auth = () => {
           <Text style={{ fontFamily: 'montserrat_regular', color: '#102B3F' }}>
             ¿Ya tienes una cuenta?{' '}
           </Text>
-          <Link replace href={'/loginScreen'}>
+          <Link replace href={'/loginscreen'}>
             <Text
               style={{ fontWeight: 'bold', fontFamily: 'montserrat_semibold', color: '#F78764' }}
             >

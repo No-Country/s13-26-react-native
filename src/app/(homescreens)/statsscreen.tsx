@@ -9,9 +9,10 @@ export default function StatsPage() {
   const [medallasDiarias, setMedallasDiarias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedDay, setSelectedDay] = useState(null);
-
+  
   useEffect(() => {
     async function fetchMedallas() {
+      setLoading(true);
       const totalMedallas = await tomarTotalMedallas();
       const medallasPorFecha = await tomarMedallasPorFecha();
 
@@ -27,6 +28,7 @@ export default function StatsPage() {
       setMedallasDiarias(medallasDiariasArray);
       setLoading(false);
     }
+
     fetchMedallas();
   }, []);
 
@@ -88,7 +90,7 @@ export default function StatsPage() {
         ) : (
           <View style={styles.todayContainer}>
             <Text style={styles.todayText}>
-              {selectedDay ? `Hoy acumulaste ${selectedDay.cantidad} medallas!` : 'Selecciona un día para ver las medallas'}
+              {selectedDay ? <Text>Hoy acumulaste {<Text style={{ fontWeight: 'bold', fontSize: 22  }}>{selectedDay?.cantidad}</Text>} medallas!</Text> : 'Selecciona un día para ver las medallas'}
             </Text>
           </View>
         )}
