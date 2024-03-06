@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router/tabs';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import { Image } from 'react-native';
 import logo from '../../assets/icons/logo.png';
+
 export default function AppLayout() {
   return (
     <Tabs
@@ -29,7 +30,7 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="statsscreen"
+        name="statsScreen"
         options={{
           title: 'Historial',
           tabBarIcon: ({ focused }) => (
@@ -47,7 +48,7 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        name="profilescreen"
+        name="profileScreen"
         options={{
           title: 'Perfil',
           tabBarIcon: ({ focused }) => (
