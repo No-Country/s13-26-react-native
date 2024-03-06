@@ -3,7 +3,6 @@ import {
   View, Text, Switch, StyleSheet, FlatList,
 } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import IconParentesis from '@/assets/IconParentesis';
 
 function Notifications() {
   const [isEnabled, setIsEnabled] = useState(false);

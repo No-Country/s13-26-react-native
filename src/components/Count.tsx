@@ -4,15 +4,17 @@ import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import {
     View, Text, StyleSheet, TouchableOpacity
 } from 'react-native';
+import { sumarMedalla } from '@/services/MedalsServices';
 
 function Count({ duration }: { duration: number }) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [complete, setComplete] = useState(false)
-
+    {//() =>( setIsPlaying((prevIsPlaying) => !prevIsPlaying))
+    }
     return (
         <>
             {complete === false ?
-                <TouchableOpacity style={style.containerStopwatch} onPress={() => setIsPlaying((prevIsPlaying) => !prevIsPlaying)} >
+                <TouchableOpacity style={style.containerStopwatch} onPress={sumarMedalla} >
                     <CountdownCircleTimer
                         isPlaying={isPlaying}
                         duration={duration}
