@@ -1,24 +1,32 @@
-import React from 'react';
-import { Text, View, StyleSheet, ActivityIndicator } from 'react-native';
-import Boton from '../../ui/Boton';
-import { useSignOut, useAuthState } from 'react-firebase-hooks/auth';
-import { Firebase_Auth } from '@/components/auth/FirebaseConfig';
+import React, { useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import SegmentedControlTab from 'react-native-segmented-control-tab';
+import { Horarios } from '@/components/settingsComponent/Horarios';
+
 export default function ProfilePage() {
-  const [signOut, loadingOut] = useSignOut(Firebase_Auth);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   return (
-    <View style={style.container}>
-      {loadingOut ? (
-        <ActivityIndicator size="large" color="#ffffff" />
-      ) : (
-        <View style={{ alignItems: 'center' }}>
-          <Boton title="Cerrar sesión" onPress={signOut} />
-        </View>
-      )}
+    <View style={styles.container}>
+      <View style={styles.segmented}>
+        <SegmentedControlTab
+          values={['Horarios', 'Notificaciones']}
+          selectedIndex={selectedIndex}
+          onTabPress={(index) => setSelectedIndex(index)}
+          activeTabStyle={styles.activeTab}
+          tabStyle={styles.tab}
+          tabTextStyle={styles.tabText}
+          activeTabTextStyle={styles.activeTabText}
+          borderRadius={16}
+        />
+      </View>
+      <View style={{ width: '100%', height: '100%' }}>
+        <Horarios />
+      </View>
     </View>
   );
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     paddingVertical: 21,
     paddingHorizontal: 16,
@@ -27,4 +35,36 @@ const style = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+  segmented: {
+    width: '100%',
+    backgroundColor: '#ebebeb',
+    borderRadius: 16
+  },
+  activeTab: {
+    backgroundColor: '#7676801F',
+    borderColor: '#ebebeb',
+    borderWidth: 4,
+    borderRadius: 14,
+  },
+  tab: {
+    backgroundColor: '#ebebeb',
+    borderColor: '#ebebeb',
+    borderWidth: 6
+  },
+  tabText: {
+    color: '#1c1c1c',
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  activeTabText: {
+    color: '#1c1c1c',
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
+    width: '100%',
+  }
 });

@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
+import { sumarMedalla } from '@/services/MedalsServices';
 import Count from '@/components/Count';
 function SpecificVideo() {
   const specificVideo = useLocalSearchParams();
@@ -25,6 +26,7 @@ const dutation:number =+specificVideo.duracion
           source={{
             uri: specificVideo.url,
           }}
+          resizeMode="contain"
         />
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           <MaterialCommunityIcons name="clock-time-five-outline" size={22} color="#09A4B7" />
@@ -66,6 +68,8 @@ const style = StyleSheet.create({
   },
   containerImg: {
     alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 10
   },
   img: {
     width: 220,

@@ -1,7 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, View, Text, ScrollView } from 'react-native';
-
+import { TouchableOpacity, StyleSheet, View, Text, ScrollView, Image } from 'react-native';
+import { corporal, fatiga, estres, visual } from '../assets';
 function OpcionHome({ text = 'Vacio', onClick = () => {} }) {
+  let icon =
+    text == 'Corporal' ? corporal : text == 'Visual' ? visual : text == 'Estrés' ? estres : fatiga;
   return (
     <TouchableOpacity onPress={onClick} style={[style.item]}>
       <View
@@ -12,8 +14,25 @@ function OpcionHome({ text = 'Vacio', onClick = () => {} }) {
           justifyContent: 'flex-end',
         }}
       >
-        <View></View>
-        <View style={{ backgroundColor: 'rgba(255, 255, 255, .5)', height: 50 }}>
+        <Image
+          style={{
+            width: '100%',
+            height: '100%',
+            resizeMode: 'cover',
+            borderRadius: 10,
+          }}
+          source={icon}
+        ></Image>
+        <View
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, .8)',
+            height: 50,
+            position: 'absolute',
+            width: '100%',
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
+          }}
+        >
           <Text
             numberOfLines={1}
             style={{
@@ -24,6 +43,7 @@ function OpcionHome({ text = 'Vacio', onClick = () => {} }) {
               paddingVertical: 14,
               width: 'auto',
               flex: 1,
+              color: '#09A4B7',
             }}
           >
             {text}
@@ -56,6 +76,7 @@ export default OpcionHome;
 
 const style = StyleSheet.create({
   grid: {
+    paddingTop: 10,
     display: 'flex',
     flex: 2,
     width: '100%',
@@ -67,7 +88,7 @@ const style = StyleSheet.create({
   },
   item: {
     flex: 1,
-    height: 200,
+    height: 230,
     marginBottom: 24,
     width: '95%',
   },

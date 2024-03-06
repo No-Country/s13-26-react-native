@@ -7,11 +7,24 @@
       "output": "single",
       "bundler": "metro"
     },
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "backgroundColor": "white"
+    },
+    "icon": "./src/assets/icon.png",
     "plugins": [
       [
         "expo-router",
         {
           "origin": "https://n"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./src/assets/icons/logo.png",
+          "color": "#ffffff",
+          "sounds": ["./src/assets/resources/tone.wav"]
         }
       ]
     ],

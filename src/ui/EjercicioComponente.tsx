@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { TouchableOpacity, StyleSheet, View, Text, Image } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
 
-function EjercicioComponente({ title = 'falta', url, onClick }) {
+function EjercicioComponente({ title = 'falta', duracion, url, onClick }) {
   return (
     <>
       <TouchableOpacity onPress={onClick} style={{ marginBottom: 15 }}>
@@ -20,11 +21,14 @@ function EjercicioComponente({ title = 'falta', url, onClick }) {
             style={{
               height: '100%',
               flex: 1,
+              backgroundColor: 'white',
+              borderRadius: 10
             }}
           >
             <Image
               source={{ uri: url }}
               style={{ width: '100%', height: '100%', borderRadius: 10 }}
+              resizeMode="contain"
             />
           </View>
           <View
@@ -42,7 +46,15 @@ function EjercicioComponente({ title = 'falta', url, onClick }) {
             >
               {title}
             </Text>
+            <Text style={{ color: '#F78764' }}>
+              00:{duracion}
+            </Text>
           </View>
+
+          <View>
+            <FontAwesome5 name="chevron-right" size={30} color="#67397E" />
+          </View>
+
         </View>
       </TouchableOpacity>
       <View style={{ borderBottomWidth: 1, borderBottomColor: '#D9D9D9', marginBottom: 15 }}></View>

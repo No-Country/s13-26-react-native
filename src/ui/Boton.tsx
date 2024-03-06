@@ -19,20 +19,20 @@ export default function Boton(props: props) {
 
 const styles = StyleSheet.create({
   button: {
-    height: 40,
+    height: 46,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 25,
     borderRadius: 10,
-    backgroundColor: '#1D1D1B',
+    backgroundColor: '#67397E',
   },
   text: {
     fontFamily: 'montserrat_medium',
     fontSize: 16,
     lineHeight: 19.5,
-    fontWeight: '500',
-    letterSpacing: 0.25,
-    color: 'white',
+    fontWeight: '600',
+    letterSpacing: 0.2,
+    color: '#FFFFFF',
   },
 });
