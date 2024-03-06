@@ -1,7 +1,9 @@
 # (Paréntesis)
 
 ¿Sabías tú que si pasas mucho tiempo frente a la pantalla, es muy importante tomar pausas activas durante el día?
-Nuestras pausas te ayudarán a sentirte mejor física y mentalmente.## Features
+Nuestras pausas te ayudarán a sentirte mejor física y mentalmente.
+
+## Features
 
 - A
 - A
