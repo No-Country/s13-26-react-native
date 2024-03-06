@@ -3,7 +3,7 @@
 ¿Sabías tú que si pasas mucho tiempo frente a la pantalla, es muy importante tomar pausas activas durante el día?
 Nuestras pausas te ayudarán a sentirte mejor física y mentalmente.
 
-## Features
+## Características
 
 - A
 - A
@@ -12,7 +12,7 @@ Nuestras pausas te ayudarán a sentirte mejor física y mentalmente.
 ## Equipo
 
 - [@asd](https://github.com/asd)
-## Tech Stack
+## Stack de Tecnologías
 
 **Client:** Expo, React Native
 
