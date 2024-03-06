@@ -9,7 +9,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { Firestore_Db as db } from '@/components/auth/FirebaseConfig';
 
 function SectionScreen() {
-  const [data, setData] = useState<{ id: string; [key: string]: any }[]>([]);
+  const [data, setData] = useState<{ id: string;[key: string]: any }[]>([]);
   const [loading, setLoading] = useState(true);
   const { sectionScreen } = useLocalSearchParams();
   const router = useRouter();
@@ -41,13 +41,14 @@ function SectionScreen() {
           <FlashList
             data={data}
             renderItem={({ item }) => (
-              <EjercicioComponente
-                title={item?.titulo}
-                url={item?.url}
-                onClick={() =>
-                  router.push({ pathname: `/homeScreen/specificVideo/${item?.id}`, params: item })
-                }
-              ></EjercicioComponente>
+                <EjercicioComponente
+                  title={item?.titulo}
+                  url={item?.url}
+                  duracion={item?.duracion}
+                  onClick={() =>
+                    router.push({ pathname: `/homeScreen/specificVideo/${item?.id}`, params: item })
+                  }
+                />
             )}
             estimatedItemSize={111}
           />

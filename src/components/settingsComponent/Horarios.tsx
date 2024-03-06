@@ -14,10 +14,6 @@ export const Horarios = () => {
 
   const { selectedDays, selectedStartTime, selectedEndTime, setSelectedDays, setSelectedStartTime, setSelectedEndTime } = useHorariosStore();
 
-  const buttonChangeComponent = () => (
-    <Boton title={mostrarAgregarHorarios ? 'Atras' : 'Agregar'} onPress={() => setMostrarAgregarHorarios(!mostrarAgregarHorarios)}  />
-  );
-
   useEffect(() => {
     const fetchHorarios = async () => {
       try {
@@ -83,8 +79,8 @@ export const Horarios = () => {
           <AgregarHorarios />
           <View style={{ flex: 1, width: '100%', justifyContent: 'flex-end' }}>
             <View style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginBottom: 40 }}>
-              <Boton title='Agregar' onPress={borrarHorariosUsuario} />
-              {buttonChangeComponent()}
+              <Boton title='Atrás' onPress={() => setMostrarAgregarHorarios(!mostrarAgregarHorarios)} styles={{backgroundColor: 'transparent'}} textStyles={{color: '#F78764'}}/>
+              <Boton title='Listo' onPress={borrarHorariosUsuario} />
             </View>
           </View>
         </>
@@ -116,12 +112,12 @@ export const Horarios = () => {
                 <FontAwesome
                   name="trash-o"
                   size={20}
-                  color="gray"
+                  color="#09A4B7"
                   onPress={() => handleEliminarHorario(horario)} />
                 <Octicons
                   name="pencil"
                   size={20}
-                  color="gray" />
+                  color="#09A4B7" />
               </View >
 
             </View >
@@ -132,7 +128,7 @@ export const Horarios = () => {
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
-              alignItems: 'center'
+              alignItems: 'center',
             }}>
               <Text style={{ fontSize: 22 }}>
                 {diferenciaDeHoras(horario.inicio, horario.final)} horas
@@ -152,7 +148,7 @@ export const Horarios = () => {
           <Text style={{ fontSize: 20, fontWeight: '500' }}>¿Aún no agregas tus horarios?</Text>
           <Text style={{ textAlign: 'center', marginVertical: 10 }}>Agrega tus horarios frente a la pantalla y activa las notificaciones</Text>
 
-          {buttonChangeComponent()}
+          <Boton title='Agregar' onPress={() => setMostrarAgregarHorarios(!mostrarAgregarHorarios)}  />
 
         </View >
       )}
@@ -167,11 +163,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   horarioContainer: {
-    backgroundColor: 'lightgray',
+    backgroundColor: '#E1F4EF',
     width: '100%',
     padding: 10,
     marginTop: 16,
     borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#09A4B7'
   },
   sinHorarioContainer: {
     backgroundColor: 'lightgray',
