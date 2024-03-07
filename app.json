@@ -11,7 +11,10 @@
       "image": "./src/assets/splash.png",
       "backgroundColor": "white"
     },
-    "icon": "./src/assets/icon.png",
+    "notification": {
+      "icon": "./src/assets/icons/logo.png",
+      "color": "#C4EADF"
+    },
     "plugins": [
       [
         "expo-router",
@@ -23,7 +26,7 @@
         "expo-notifications",
         {
           "icon": "./src/assets/icons/logo.png",
-          "color": "#ffffff",
+          "color": "#C4EADF",
           "sounds": ["./src/assets/resources/tone.wav"]
         }
       ]

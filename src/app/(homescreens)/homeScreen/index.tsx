@@ -20,7 +20,7 @@ function HomeScreen() {
       const getUsername = await UserInformation();
 
       setMedallas(totalMedallas);
-      setUsername(getUsername?.name.substring(0, str.indexOf(' ')));
+      setUsername(getUsername?.name.substring(0, getUsername?.name.indexOf(' ')));
     }
     fetchMedallas();
   }, []);
@@ -96,6 +96,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 16,
     flex: 1,
     display: 'flex',
+    backgroundColor: 'white',
   },
   textcontainer: {
     display: 'flex',

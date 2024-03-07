@@ -33,7 +33,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
 }));
 
 export const useOnboarding = create((set) => ({
-  onboarding: false,
+  onboarding: true,
   setOnboarding: (state) => {
     set(() => ({ onboarding: state }));
   },

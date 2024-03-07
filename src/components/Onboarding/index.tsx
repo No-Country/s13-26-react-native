@@ -39,7 +39,7 @@ const Onboarding = () => {
             pausas activas durante el día?
           </Text>
           <Text style={styles.text}>
-            Nuestras pausas te ayudarán a sentirte mejor física y mentalmente
+            Nuestras pausas te ayudarán a sentirte mejor física y mentalmente.
           </Text>
         </View>
         <View style={styles.slide}>

@@ -9,18 +9,21 @@ export default function StatsPage() {
   const [medallasDiarias, setMedallasDiarias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedDay, setSelectedDay] = useState(null);
-  
+
   useEffect(() => {
     async function fetchMedallas() {
       setLoading(true);
       const totalMedallas = await tomarTotalMedallas();
       const medallasPorFecha = await tomarMedallasPorFecha();
 
-      const medallasDiariasArray = Object.entries(medallasPorFecha).map(([fecha, cantidad]) => ({ fecha, cantidad }));
+      const medallasDiariasArray = Object.entries(medallasPorFecha).map(([fecha, cantidad]) => ({
+        fecha,
+        cantidad,
+      }));
 
       medallasDiariasArray.sort((a, b) => {
-        const fechaA = new Date(a.fecha.split("/").reverse().join("-")).getTime();
-        const fechaB = new Date(b.fecha.split("/").reverse().join("-")).getTime();
+        const fechaA = new Date(a.fecha.split('/').reverse().join('-')).getTime();
+        const fechaB = new Date(b.fecha.split('/').reverse().join('-')).getTime();
         return fechaA - fechaB;
       });
 
@@ -52,7 +55,7 @@ export default function StatsPage() {
   return (
     <View style={styles.container}>
       <View style={styles.centerAlign}>
-        <Feather name="award" size={25} color='#F78764' />
+        <Feather name="award" size={25} color="#F78764" />
         <Text style={styles.headerText}>Mi Progreso</Text>
         <Text>Por cada pausa que completes ganas 1 medalla.</Text>
       </View>
@@ -73,7 +76,7 @@ export default function StatsPage() {
               key={fecha}
               style={[
                 styles.dayContainer,
-                selectedDay && selectedDay.fecha === fecha && { backgroundColor: '#67397E' }
+                selectedDay && selectedDay.fecha === fecha && { backgroundColor: '#67397E' },
               ]}
               onPress={() => handleDayPress(fecha, cantidad)}
             >
@@ -86,17 +89,30 @@ export default function StatsPage() {
 
       <View style={styles.bottomContainer}>
         {medallas === 0 ? (
-          <Text style={styles.noMedalsText}>Aún no tienes medallas ¡Es momento de hacer un Paréntesis!</Text>
+          <Text style={styles.noMedalsText}>
+            Aún no tienes medallas ¡Es momento de hacer un Paréntesis!
+          </Text>
         ) : (
           <View style={styles.todayContainer}>
             <Text style={styles.todayText}>
-              {selectedDay ? <Text>Hoy acumulaste {<Text style={{ fontWeight: 'bold', fontSize: 22  }}>{selectedDay?.cantidad}</Text>} medallas!</Text> : 'Selecciona un día para ver las medallas'}
+              {selectedDay ? (
+                <Text>
+                  Hoy acumulaste{' '}
+                  {
+                    <Text style={{ fontWeight: 'bold', fontSize: 22 }}>
+                      {selectedDay?.cantidad}
+                    </Text>
+                  }{' '}
+                  medallas!
+                </Text>
+              ) : (
+                'Selecciona un día para ver las medallas'
+              )}
             </Text>
           </View>
         )}
         <Image style={styles.logo} source={logo} resizeMode="contain" />
       </View>
-
     </View>
   );
 }
@@ -109,6 +125,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   centerAlign: {
     alignItems: 'center',
@@ -176,11 +193,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 60,
     marginTop: 30,
-    marginRight: 10
+    marginRight: 10,
   },
   noMedalsText: {
     fontSize: 16,
     color: 'red',
     marginBottom: 10,
-  }
+  },
 });

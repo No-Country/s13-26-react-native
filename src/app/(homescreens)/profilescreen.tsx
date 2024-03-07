@@ -18,16 +18,17 @@ import {
   Octicons,
   Ionicons,
 } from '@expo/vector-icons';
-import Boton from '@/ui/Boton';
-
+import Boton, { BotonNot } from '@/ui/Boton';
+import { UserInformation } from '@/services/UserData';
 export default function ProfilePage() {
   const [username, setUsername] = useState('...');
   const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     async function fetchUser() {
       const getUsername = await UserInformation();
 
-      setUsername(getUsername?.name.substring(0, str.indexOf(' ')));
+      setUsername(getUsername?.name.substring(0, getUsername?.name.indexOf(' ')));
     }
     fetchUser();
   }, []);
@@ -80,7 +81,7 @@ export default function ProfilePage() {
         onClick={() => setModalVisible(!modalVisible)}
       />
       <ProfileComponent icon="info" text="Acerca de Nosotros" />
-      <View style={{ flex: 'auto', display: 'flex' }}>
+      <View style={{ display: 'flex' }}>
         <ProfileComponentLog />
       </View>
       <Modal
@@ -134,6 +135,7 @@ export default function ProfilePage() {
           </ScrollView>
         </TouchableWithoutFeedback>
       </Modal>
+      <BotonNot />
     </View>
   );
 }
@@ -169,10 +171,10 @@ const ProfileComponent = ({
       )}
       {icon == 'info' && <Feather name="lock" size={20} color="#09A4B7" />}
 
-      <Text style={{ color: '#646F77', fontFamily: 'montserrat_semibold', fontSize: 12, flex: 1 }}>
+      <Text style={{ color: '#646F77', fontFamily: 'montserrat_semibold', fontSize: 12 }}>
         {text}
       </Text>
-      <MaterialIcons style={{ flex: 'auto' }} name="arrow-forward-ios" size={20} color="#67397E" />
+      <MaterialIcons name="arrow-forward-ios" size={20} color="#67397E" />
     </TouchableOpacity>
   );
 };
@@ -203,10 +205,10 @@ const ProfileComponentLog = ({
       }}
     >
       <Feather name="log-out" size={20} color="#67397E" />
-      <Text style={{ color: '#67397E', fontFamily: 'montserrat_semibold', fontSize: 12, flex: 1 }}>
+      <Text style={{ color: '#67397E', fontFamily: 'montserrat_semibold', fontSize: 12 }}>
         {text}
       </Text>
-      <MaterialIcons style={{ flex: 'auto' }} name="arrow-forward-ios" size={20} color="#67397E" />
+      <MaterialIcons name="arrow-forward-ios" size={20} color="#67397E" />
     </TouchableOpacity>
   );
 };
@@ -216,6 +218,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 16,
     flex: 1,
     display: 'flex',
+    backgroundColor: 'white',
   },
   textcontainer: {
     display: 'flex',
