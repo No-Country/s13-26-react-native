@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: 'white', 
+    backgroundColor: 'white',
   },
   segmented: {
     width: '100%',
     backgroundColor: '#ebebeb',
-    borderRadius: 16
+    borderRadius: 16,
   },
   activeTab: {
     backgroundColor: 'white',
@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
   tab: {
     backgroundColor: '#ebebeb',
     borderColor: '#ebebeb',
-    borderWidth: 6  
+    borderWidth: 6,
   },
   tabText: {
     color: '#1c1c1c',
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   activeTabText: {
     color: '#1c1c1c',
@@ -76,5 +76,5 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: 20,
     width: '100%',
-  }
+  },
 });

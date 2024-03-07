@@ -5,6 +5,7 @@ import { obtenerHorariosUsuario, eliminarHorario, guardarHorariosUsuario } from 
 import { AgregarHorarios } from './AgregarHorarios';
 import Boton from '@/ui/Boton';
 import useHorariosStore from '@/storages/horariosstore';
+import { MyAppText } from '@/ui/MyAppText';
 
 export const Horarios = () => {
   const [horarios, setHorarios] = useState([]);
@@ -73,7 +74,7 @@ export const Horarios = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Mis horarios frente a la pantalla</Text>
+      <MyAppText style={{ fontWeight: 'bold', fontSize: 16 }}>Mis horarios frente a la pantalla</MyAppText>
       {mostrarAgregarHorarios ? (
         <>
           <AgregarHorarios />
@@ -99,9 +100,9 @@ export const Horarios = () => {
               marginHorizontal: 8
             }}>
 
-              <Text style={{ fontWeight: '500' }}>
+              <MyAppText style={{ fontWeight: '500', color: '#102B3F', fontFamily: 'montserrat_regular' }}>
                 {horario.dias.join('  ')}
-              </Text>
+              </MyAppText>
 
               <View style={{
                 display: 'flex',
@@ -130,12 +131,12 @@ export const Horarios = () => {
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
-              <Text style={{ fontSize: 22 }}>
+              <MyAppText style={{ fontSize: 20, fontWeight: 600, color: '#102B3F' }}>
                 {diferenciaDeHoras(horario.inicio, horario.final)} horas
-              </Text>
-              <Text style={{ marginTop: 10 }}>
+              </MyAppText>
+              <MyAppText style={{ marginTop: 10, color: '#102B3F', fontWeight: '400', fontSize: 14, fontFamily: 'montserrat_regular' }}>
                 {horario.inicio} - {horario.final} hrs
-              </Text >
+              </MyAppText >
             </View >
           </View >
           ))}
@@ -145,8 +146,8 @@ export const Horarios = () => {
         </>
       ) : (
         <View style={styles.sinHorarioContainer}>
-          <Text style={{ fontSize: 20, fontWeight: '500' }}>¿Aún no agregas tus horarios?</Text>
-          <Text style={{ textAlign: 'center', marginVertical: 10 }}>Agrega tus horarios frente a la pantalla y activa las notificaciones</Text>
+          <MyAppText style={{ fontSize: 20, fontWeight: '500' }}>¿Aún no agregas tus horarios?</MyAppText>
+          <MyAppText style={{ textAlign: 'center', marginVertical: 10 }}>Agrega tus horarios frente a la pantalla y activa las notificaciones</MyAppText>
 
           <Boton title='Agregar' onPress={() => setMostrarAgregarHorarios(!mostrarAgregarHorarios)}  />
 

@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router/tabs';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import { Image } from 'react-native';
 import logo from '../../assets/icons/logo.png';
+
 export default function AppLayout() {
   return (
     <Tabs
@@ -15,6 +16,7 @@ export default function AppLayout() {
           <Image style={{ width: 200, height: 27 }} source={logo} resizeMode="contain" />
         ),
         headerTitleStyle: { textAlign: 'center', alignSelf: 'center' },
+        headerTitleAlign: 'center',
         headerStyle: { backgroundColor: '#C4EADF' },
         tabBarStyle: { borderTopWidth: 1, borderTopColor: 'rgba(193, 236, 219, .4)' },
       }}

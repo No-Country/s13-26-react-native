@@ -9,22 +9,21 @@ import { UserInformation } from '@/services/UserData';
 
 function HomeScreen() {
   const router = useRouter();
-  const [username, setUsername] = useState('Cargando...');
+  const [username, setUsername] = useState('...');
   const [hours, setHours] = useState(4);
-  const [medallas, setMedallas] = useState(0)
+  const [medallas, setMedallas] = useState(0);
   const onboarding = useOnboarding((state) => state.onboarding);
 
   useEffect(() => {
     async function fetchMedallas() {
       const totalMedallas = await tomarTotalMedallas();
-      const getUsername = await UserInformation()
+      const getUsername = await UserInformation();
 
       setMedallas(totalMedallas);
-      setUsername(getUsername?.name)
+      setUsername(getUsername?.name.substring(0, getUsername?.name.indexOf(' ')));
     }
     fetchMedallas();
-  }, [])
-  
+  }, []);
 
   if (onboarding) {
     return <Redirect href={'../../initialLogin'}></Redirect>;
