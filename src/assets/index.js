@@ -6,3 +6,4 @@ export { default as corporal } from './resources/corporal.jpg';
 export { default as visual } from './resources/visual.jpg';
 export { default as fatiga } from './resources/fatiga.jpg';
 export { default as estres } from './resources/estres.jpg';
+export { default as nube } from './nube.svg';

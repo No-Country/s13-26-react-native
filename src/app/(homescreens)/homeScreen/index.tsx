@@ -97,6 +97,8 @@ const style = StyleSheet.create({
     paddingHorizontal: 16,
     flex: 1,
     display: 'flex',
+    backgroundColor: 'white', 
+
   },
   textcontainer: {
     display: 'flex',

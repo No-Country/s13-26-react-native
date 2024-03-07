@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import { Horarios } from '@/components/settingsComponent/Horarios';
+import Notifications from '../Notifications';
 
 export default function ProfilePage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -20,8 +21,11 @@ export default function ProfilePage() {
         />
       </View>
       <View style={{ width: '100%', height: '100%' }}>
-        <Horarios />
+       { selectedIndex===0?
+        <Horarios />:
+        <Notifications/>}
       </View>
+      
     </View>
   );
 }
@@ -34,6 +38,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: 'white', 
   },
   segmented: {
     width: '100%',
@@ -41,15 +46,20 @@ const styles = StyleSheet.create({
     borderRadius: 16
   },
   activeTab: {
-    backgroundColor: '#7676801F',
+    backgroundColor: 'white',
     borderColor: '#ebebeb',
     borderWidth: 4,
     borderRadius: 14,
+    elevation: 5, // Sombras en Android
+    shadowColor: '#000', // Sombras en iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   tab: {
     backgroundColor: '#ebebeb',
     borderColor: '#ebebeb',
-    borderWidth: 6
+    borderWidth: 6  
   },
   tabText: {
     color: '#1c1c1c',

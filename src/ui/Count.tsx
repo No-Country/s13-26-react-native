@@ -14,7 +14,7 @@ function Count({ duration }: { duration: number }) {
     return (
         <>
             {complete === false ?
-                <TouchableOpacity style={style.containerStopwatch} onPress={sumarMedalla} >
+                <TouchableOpacity style={style.containerStopwatch} onPress={() =>( setIsPlaying((prevIsPlaying) => !prevIsPlaying))} >
                     <CountdownCircleTimer
                         isPlaying={isPlaying}
                         duration={duration}
@@ -24,7 +24,7 @@ function Count({ duration }: { duration: number }) {
                         size={115}
                         onComplete={() => setComplete(true)}
                     >
-                        {({ remainingTime }) => <Text>{remainingTime}</Text>}
+                        {({ remainingTime }) => <Text style={style.timerText}>{remainingTime}</Text>}
                     </CountdownCircleTimer>
 
                     <View style={style.controllerPlay}>
@@ -51,6 +51,12 @@ const style = StyleSheet.create({
 
     containerStopwatch: {
         alignItems: 'center',
+    },
+    timerText:{
+        fontFamily: 'montserrat_semibold',
+        fontSize: 28.75,
+        fontWeight: '600',
+
     },
     controllerPlay: {
         borderRadius: 50,

@@ -2,7 +2,8 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { sumarMedalla } from '@/services/MedalsServices';
-import Count from '@/components/Count';
+import Count from '@/ui/Count';
+
 function SpecificVideo() {
   const specificVideo = useLocalSearchParams();
 const dutation:number =+specificVideo.duracion
@@ -60,8 +61,10 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    display: 'flex',
-    marginBottom: 10,
+    display: 'flex',    
+    backgroundColor: 'white', 
+    
+
   },
   containerTitle: {
     marginBottom: 6,
@@ -87,4 +90,5 @@ const style = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 5,
   },
+   
 });

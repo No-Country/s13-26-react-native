@@ -109,6 +109,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: 'white', 
+
   },
   centerAlign: {
     alignItems: 'center',
