@@ -1,14 +1,19 @@
-Proyecto No Country
+# (Paréntesis)
 
-Integrantes: 
-Ana Pino	Diseñadora UX/UI
-Laura Romero	Diseñadora UX/UI 
-Luigi Bocco	Diseñador UX/ UI
-Lucas Fernández	Full Stack
-Stefano Frisoni	Front End
-Valentino Indorato	Front End
-Juan Cruz Musso	Full Stack (Back End)
-Cynthia García	Tester QA
-Bryan Aguilar	Tester QA
-Gustavo Guido	Tester QA
-Joshua Frías Team Leader
+¿Sabías tú que si pasas mucho tiempo frente a la pantalla, es muy importante tomar pausas activas durante el día?
+Nuestras pausas te ayudarán a sentirte mejor física y mentalmente.
+
+## Características
+
+- A
+- A
+- A
+- A
+## Equipo
+
+- [@asd](https://github.com/asd)
+## Stack de Tecnologías
+
+**Client:** Expo, React Native
+
+**Server:** Firebase, Cloudinary
