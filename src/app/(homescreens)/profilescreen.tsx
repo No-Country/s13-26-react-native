@@ -154,7 +154,6 @@ const ProfileComponent = ({
         marginTop: 20,
         display: 'flex',
         width: '92%',
-        justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
         gap: 10,
@@ -171,7 +170,7 @@ const ProfileComponent = ({
       )}
       {icon == 'info' && <Feather name="lock" size={20} color="#09A4B7" />}
 
-      <Text style={{ color: '#646F77', fontFamily: 'montserrat_semibold', fontSize: 12 }}>
+      <Text style={{ color: '#646F77', fontFamily: 'montserrat_semibold', fontSize: 12, flex: 1 }}>
         {text}
       </Text>
       <MaterialIcons name="arrow-forward-ios" size={20} color="#67397E" />
@@ -193,7 +192,6 @@ const ProfileComponentLog = ({
         marginTop: 80,
         display: 'flex',
         width: '92%',
-        justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
         gap: 10,
@@ -205,7 +203,7 @@ const ProfileComponentLog = ({
       }}
     >
       <Feather name="log-out" size={20} color="#67397E" />
-      <Text style={{ color: '#67397E', fontFamily: 'montserrat_semibold', fontSize: 12 }}>
+      <Text style={{ color: '#67397E', fontFamily: 'montserrat_semibold', fontSize: 12, flex: 1 }}>
         {text}
       </Text>
       <MaterialIcons name="arrow-forward-ios" size={20} color="#67397E" />
