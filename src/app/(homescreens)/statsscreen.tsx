@@ -4,36 +4,63 @@ import { Feather } from '@expo/vector-icons';
 import { tomarTotalMedallas, tomarMedallasPorFecha } from '@/services/MedalsServices';
 import { logo } from '@/assets/icons/index';
 
+import { UserData } from '@/services/UserData';
+import { Firestore_Db } from '@/components/auth/FirebaseConfig';
+import { doc, onSnapshot } from 'firebase/firestore';
+
+import { MyAppText } from '@/ui/MyAppText';
+
 export default function StatsPage() {
   const [medallas, setMedallas] = useState(0);
   const [medallasDiarias, setMedallasDiarias] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    async function fetchMedallas() {
-      setLoading(true);
-      const totalMedallas = await tomarTotalMedallas();
-      const medallasPorFecha = await tomarMedallasPorFecha();
+useEffect(() => {
+  let unsubscribe;
 
-      const medallasDiariasArray = Object.entries(medallasPorFecha).map(([fecha, cantidad]) => ({
-        fecha,
-        cantidad,
-      }));
+  const fetchData = async () => {
+    const querySnapshot = await UserData();
+    const userIds = querySnapshot.docs.map((doc) => doc.id);
+    const userId = userIds[0];
 
-      medallasDiariasArray.sort((a, b) => {
-        const fechaA = new Date(a.fecha.split('/').reverse().join('-')).getTime();
-        const fechaB = new Date(b.fecha.split('/').reverse().join('-')).getTime();
-        return fechaA - fechaB;
-      });
+    unsubscribe = onSnapshot(doc(Firestore_Db, "users", userId), (doc) => {
+      setUserData(doc?.data());
+    });
+  };
 
-      setMedallas(totalMedallas);
-      setMedallasDiarias(medallasDiariasArray);
-      setLoading(false);
+  fetchData();
+
+  return () => {
+    if (unsubscribe) {
+      unsubscribe();
     }
+  };
+}, []);
 
-    fetchMedallas();
-  }, []);
+useEffect(() => {
+  if (userData) {
+    setLoading(true);
+    const totalMedallas = userData?.totalMedallas;
+    const medallasPorFecha = userData?.medallas;
+
+    const medallasDiariasArray = Object.entries(medallasPorFecha).map(([fecha, cantidad]) => ({
+      fecha,
+      cantidad,
+    }));
+
+    medallasDiariasArray.sort((a, b) => {
+      const fechaA = new Date(a.fecha.split('/').reverse().join('-')).getTime();
+      const fechaB = new Date(b.fecha.split('/').reverse().join('-')).getTime();
+      return fechaA - fechaB;
+    });
+
+    setMedallas(totalMedallas);
+    setMedallasDiarias(medallasDiariasArray);
+    setLoading(false);
+  }
+}, [userData]);
 
   const getWeekdayName = (fecha) => {
     const weekdays = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
@@ -56,32 +83,32 @@ export default function StatsPage() {
     <View style={styles.container}>
       <View style={styles.centerAlign}>
         <Feather name="award" size={25} color="#F78764" />
-        <Text style={styles.headerText}>Mi Progreso</Text>
-        <Text>Por cada pausa que completes ganas 1 medalla.</Text>
+        <MyAppText style={styles.headerText}>Mi Progreso</MyAppText>
+        <MyAppText style={{color: '#102B3F', fontWeight: '400', fontFamily: 'montserrat_regular'}}>Por cada pausa que completes ganas 1 medalla.</MyAppText>
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>Tienes {medallas} medallas</Text>
-        <Text style={[styles.infoText, { marginTop: 8 }]}>¡Vamos por más!</Text>
+        <MyAppText style={styles.infoText}>Tienes {medallas} medallas</MyAppText>
+        <MyAppText style={{ marginTop: 8, color: 'white', fontFamily: 'montserrat_regular' }}>¡Vamos por más!</MyAppText>
       </View>
 
-      <Text style={[styles.headerText, { marginTop: 20 }]}>Mi progreso diario</Text>
+      <MyAppText style={[styles.headerText, { marginTop: 20 }]}>Mi progreso diario</MyAppText>
 
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />
       ) : (
         <View style={styles.carouselContainer}>
-          {medallasDiarias.map(({ fecha, cantidad }) => (
+          {medallasDiarias?.map(({ fecha, cantidad }) => (
             <TouchableOpacity
               key={fecha}
               style={[
                 styles.dayContainer,
-                selectedDay && selectedDay.fecha === fecha && { backgroundColor: '#67397E' },
+                selectedDay && selectedDay?.fecha === fecha && { backgroundColor: '#67397E' },
               ]}
               onPress={() => handleDayPress(fecha, cantidad)}
             >
-              <Text style={styles.whiteText}>{getWeekdayName(fecha)}</Text>
-              <Text style={styles.whiteText}>{getDateForDay(fecha)}</Text>
+              <MyAppText style={styles.whiteText}>{getWeekdayName(fecha)}</MyAppText>
+              <MyAppText style={styles.whiteText}>{getDateForDay(fecha)}</MyAppText>
             </TouchableOpacity>
           ))}
         </View>
@@ -89,26 +116,26 @@ export default function StatsPage() {
 
       <View style={styles.bottomContainer}>
         {medallas === 0 ? (
-          <Text style={styles.noMedalsText}>
+          <MyAppText style={styles.noMedalsText}>
             Aún no tienes medallas ¡Es momento de hacer un Paréntesis!
-          </Text>
+          </MyAppText>
         ) : (
           <View style={styles.todayContainer}>
-            <Text style={styles.todayText}>
+            <MyAppText style={styles.todayText}>
               {selectedDay ? (
-                <Text>
+                <MyAppText style={{fontFamily: 'montserrat_regular', fontWeight: '600'}}>
                   Hoy acumulaste{' '}
                   {
-                    <Text style={{ fontWeight: 'bold', fontSize: 22 }}>
+                    <MyAppText style={{ fontWeight: 'bold', fontSize: 22 }}>
                       {selectedDay?.cantidad}
-                    </Text>
+                    </MyAppText>
                   }{' '}
                   medallas!
-                </Text>
+                </MyAppText>
               ) : (
                 'Selecciona un día para ver las medallas'
               )}
-            </Text>
+            </MyAppText>
           </View>
         )}
         <Image style={styles.logo} source={logo} resizeMode="contain" />
@@ -129,6 +156,7 @@ const styles = StyleSheet.create({
   },
   centerAlign: {
     alignItems: 'center',
+    
   },
   headerText: {
     fontSize: 20,
@@ -147,7 +175,7 @@ const styles = StyleSheet.create({
   infoText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
   },
   carouselContainer: {
     marginTop: 10,
@@ -166,6 +194,7 @@ const styles = StyleSheet.create({
   },
   whiteText: {
     color: 'white',
+    fontFamily: 'montserrat_regular'
   },
   todayContainer: {
     backgroundColor: '#E1F4EF',
@@ -178,7 +207,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   todayText: {
-    fontSize: 20,
+    fontSize: 16,
+    color: '#102B3F',
+    
   },
   bottomContainer: {
     position: 'absolute',
@@ -197,7 +228,7 @@ const styles = StyleSheet.create({
   },
   noMedalsText: {
     fontSize: 16,
-    color: 'red',
+    color: '#102B3F',
     marginBottom: 10,
   },
 });

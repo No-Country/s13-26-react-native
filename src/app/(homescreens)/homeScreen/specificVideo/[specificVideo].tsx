@@ -2,10 +2,11 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { sumarMedalla } from '@/services/MedalsServices';
+import Count from '@/ui/Count';
 
 function SpecificVideo() {
   const specificVideo = useLocalSearchParams();
-
+const dutation:number =+specificVideo.duracion
   return (
     <View style={style.container}>
       <View style={style.containerTitle}>
@@ -29,8 +30,8 @@ function SpecificVideo() {
           resizeMode="contain"
         />
         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-          <MaterialCommunityIcons name="clock-time-five-outline" size={22} color="black" />
-          <Text style={{ fontFamily: 'montserrat_regular', fontSize: 16 }}>
+          <MaterialCommunityIcons name="clock-time-five-outline" size={22} color="#09A4B7" />
+          <Text style={{ fontFamily: 'montserrat_regular', fontSize: 16 , color: '#09A4B7'}}>
             {specificVideo.duracion} s
           </Text>
         </View>
@@ -48,12 +49,7 @@ function SpecificVideo() {
           {specificVideo.descripcion}
         </Text>
       </View>
-      <TouchableOpacity style={style.containerStopwatch} onPress={sumarMedalla}>
-        <MaterialCommunityIcons name="clock-time-five-outline" size={100} color="black" />
-        <View style={style.controllerPlay}>
-          <Entypo name="controller-play" size={24} color="black" />
-        </View>
-      </TouchableOpacity>
+      <Count duration={dutation} />
     </View>
   );
 }
@@ -65,8 +61,10 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    display: 'flex',
-    marginBottom: 10,
+    display: 'flex',    
+    backgroundColor: 'white', 
+    
+
   },
   containerTitle: {
     marginBottom: 6,
@@ -92,4 +90,5 @@ const style = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 5,
   },
+   
 });
