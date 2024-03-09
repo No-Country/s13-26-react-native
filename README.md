@@ -270,6 +270,7 @@ Instrucciones para clonar el repo y ejecutar el proyecto localmente:
 </h1>
 <hr>
 
+<img src="https://ik.imagekit.io/vaip/par%C3%A9ntesis/RPReplay_Final1709599508.mov?updatedAt=1710014282551" width="30px">
 <video>
   <source src="https://ik.imagekit.io/vaip/par%C3%A9ntesis/RPReplay_Final1709599508.mov?updatedAt=1710014282551" type="video/mp4">
 </video>
