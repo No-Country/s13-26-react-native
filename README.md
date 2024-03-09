@@ -135,7 +135,7 @@ Instrucciones para clonar el repo y ejecutar el proyecto localmente:
     <td>
       <div align="center">
         <a href="https://www.linkedin.com/in/luisboccoux/" target="_blank" rel="author">
-          <img width="110" src="hhttps://media.licdn.com/dms/image/D4D35AQG402tlmfXxug/profile-framedphoto-shrink_800_800/0/1666380104396?e=1710619200&v=beta&t=BzPYOJt9s0yDRGt3aqxZOsxLmfhxb-2d6V8-HGKGqXc"/>
+          <img width="110" src="https://media.licdn.com/dms/image/D4D35AQG402tlmfXxug/profile-framedphoto-shrink_800_800/0/1666380104396?e=1710622800&v=beta&t=y3jkBP6VTHJ1lQMzzWvQ9OLU7pt_BDgVG8sinvIwvQ8"/>
         </a>
         <a href="https://www.linkedin.com/in/luisboccoux/" target="_blank" rel="author">
           <h4 style="margin-top: 1rem;">Luis Bocco</h4>
@@ -204,7 +204,7 @@ Instrucciones para clonar el repo y ejecutar el proyecto localmente:
     <td>
       <div align="center">
         <a href="https://www.linkedin.com/in/gustavo-guido-ab604812b/" target="_blank" rel="author">
-          <img width="110" src=""/>
+          <img width="110" src="https://media.licdn.com/dms/image/C4E03AQEU0rgooBod4Q/profile-displayphoto-shrink_800_800/0/1535927224757?e=1715212800&v=beta&t=CYi0a0fXejfpPmOWHU79mCH9ddwXQP_zal5d-lbsHTU"/>
         </a>
         <a href="https://www.linkedin.com/in/gustavo-guido-ab604812b/" target="_blank" rel="author">
           <h4 style="margin-top: 1rem;">Gustavo Guido</h4>
@@ -219,7 +219,7 @@ Instrucciones para clonar el repo y ejecutar el proyecto localmente:
     <td>
       <div align="center">
         <a href="https://www.linkedin.com/in/cynthia-garciaok/" target="_blank" rel="author">
-          <img width="110" src=""/>
+          <img width="110" src="https://media.licdn.com/dms/image/D5603AQGji5lqYW2uiw/profile-displayphoto-shrink_800_800/0/1700623483152?e=1715212800&v=beta&t=cT97xhzNYDLl0zMkEL7loYNsNJbOufF3vvzKE6kXz5Q"/>
         </a>
         <a href="https://www.linkedin.com/in/cynthia-garciaok/" target="_blank" rel="author">
           <h4 style="margin-top: 1rem;">Cynthia Garcia</h4>
@@ -234,7 +234,7 @@ Instrucciones para clonar el repo y ejecutar el proyecto localmente:
     <td>
       <div align="center">
         <a href="https://www.linkedin.com/in/bryan-aguilar29/" target="_blank" rel="author">
-          <img width="110" src=""/>
+          <img width="110" src="https://media.licdn.com/dms/image/D4E35AQEYmJ0BzmJ9Kw/profile-framedphoto-shrink_800_800/0/1705089623581?e=1710622800&v=beta&t=IV48EiQPK5lzGlVCq6rIWr2rl6moudfSYstTKHSy3nc"/>
         </a>
         <a href="https://www.linkedin.com/in/bryan-aguilar29/" target="_blank" rel="author">
           <h4 style="margin-top: 1rem;">Bryan Aguilar
