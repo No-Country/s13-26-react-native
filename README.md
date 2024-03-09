@@ -269,17 +269,11 @@ Instrucciones para clonar el repo y ejecutar el proyecto localmente:
 <img src="https://media1.giphy.com/media/xcFJX6T9z2iqiB9Ud9/giphy.gif" width="30px">Capturas de Pantalla de las diferentes Páginas
 </h1>
 <hr>
+[![Figma](https://ik.imagekit.io/vaip/par%C3%A9ntesis/RPReplay_Final1709599508.mov?updatedAt=1710014282551)]
 
-<img src="https://ik.imagekit.io/vaip/par%C3%A9ntesis/RPReplay_Final1709599508.mov?updatedAt=1710014282551" width="30px">
-<video>
-  <source src="https://ik.imagekit.io/vaip/par%C3%A9ntesis/RPReplay_Final1709599508.mov?updatedAt=1710014282551" type="video/mp4">
-</video>
-<video>
-  <source src="https://ik.imagekit.io/vaip/par%C3%A9ntesis/Android_Emulator_-_Pixel_3_API_34_5554_2024-03-06_22-07-44%20(1).mp4?updatedAt=1710014300983" type="video/mp4">
-</video>
-<video>
-  <source src="https://ik.imagekit.io/vaip/par%C3%A9ntesis/Screenrecorder-2024-03-06-15-35-16-205.mp4?updatedAt=1710014287738" type="video/mp4">
-</video>
+https://ik.imagekit.io/vaip/par%C3%A9ntesis/Android_Emulator_-_Pixel_3_API_34_5554_2024-03-06_22-07-44%20(1).mp4?updatedAt=1710014300983
+https://ik.imagekit.io/vaip/par%C3%A9ntesis/Screenrecorder-2024-03-06-15-35-16-205.mp4?updatedAt=1710014287738
+
 
 <br>
 <br>
