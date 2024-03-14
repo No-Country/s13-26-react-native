@@ -14,66 +14,86 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
   Feather,
-  Entypo,
   Octicons,
-  Ionicons,
 } from '@expo/vector-icons';
-import Boton, { BotonNot } from '@/ui/Boton';
+import Boton from '@/ui/Boton';
 import { UserInformation } from '@/services/UserData';
+import { Firebase_Auth } from '@/components/auth/FirebaseConfig';
+import {
+  useSignOut,
+} from 'react-firebase-hooks/auth';
+import { useRouter } from 'expo-router';
+
 export default function ProfilePage() {
-  const [username, setUsername] = useState('...');
+  const [signOut, loadingOut] = useSignOut(Firebase_Auth);
+  const router = useRouter();
+  const [userData, setUserData] = useState({
+    username: '...',
+    email: '...',
+    age: 0
+  });
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     async function fetchUser() {
-      const getUsername = await UserInformation();
+      const user = await UserInformation();
+      const { name, email, edad } = user;
+      const spaceIndex = name?.indexOf(' ');
 
-      setUsername(getUsername?.name.substring(0, getUsername?.name.indexOf(' ')));
+      const username = spaceIndex !== -1 ? name?.substring(0, spaceIndex) : name;
+      setUserData({
+        username: username,
+        email: email,
+        age: edad
+      })
+
     }
     fetchUser();
   }, []);
 
+  const ProfileComponentLog = ({
+    text = 'Cerrar Sesión',
+    icon = 'nada',
+    onClick = () => {
+      signOut
+      router.replace('loginscreen');
+    },
+  }) => {
+    return (
+      <TouchableOpacity
+        onPress={onClick}
+        style={styles.profileComponentContainer}
+      >
+        <Feather name="log-out" size={20} color="#67397E" />
+        <Text style={styles.profileComponentText}>{text}</Text>
+        <View style={{ flex: 1 }}>
+          <MaterialIcons name="arrow-forward-ios" size={30} color="#67397E" style={{ width: 30, left: '90%' }} />
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <View style={style.container}>
-      <View style={style.textcontainer}>
-        <Text style={style.textgreet}>Mi Perfil</Text>
+    <View style={styles.container}>
+      <View style={styles.textcontainer}>
+        <Text style={styles.textgreet}>Mi Perfil</Text>
       </View>
-      <View style={{ display: 'flex', flexDirection: 'row', gap: 40 }}>
-        <View style={{ borderRadius: 50, height: 100, width: 100, backgroundColor: '#C1ECDB' }}>
-          <TouchableOpacity
-            style={{
-              height: 24,
-              width: 24,
-              borderRadius: 12,
-              backgroundColor: '#09A4B7',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              position: 'absolute',
-              top: 70,
-              left: 80,
-            }}
-          >
-            <Image source={editpic} style={{ height: 14, width: 14, backgroundColor: '#09A4B7' }} />
+      <View style={styles.profileInfoContainer}>
+        <View style={styles.profileImageContainer}>
+          <TouchableOpacity style={styles.editButton}>
+            <Image source={editpic} style={styles.editIcon} />
           </TouchableOpacity>
         </View>
-        <View style={{ display: 'flex', gap: 20 }}>
-          <Text style={style.textprof}>{username}, 37</Text>
-          <Text style={style.textemail}>francisca@yahoo.com</Text>
+        <View style={styles.profileTextContainer}>
+          <Text style={styles.textprof}>{userData?.username}, {userData?.age || 'Edad sin Definir'}</Text>
+          <Text style={styles.textemail}>{userData.email}</Text>
         </View>
       </View>
       <ProfileComponent text="Editar Mi Perfil" />
 
-      <View
-        style={{
-          borderTopWidth: 1,
-          borderTopColor: 'rgba(193, 236, 219, .8)',
-          marginTop: 25,
-          marginBottom: 25,
-        }}
-      ></View>
-      <View style={style.textcontainers}>
-        <Text style={style.textsupp}>Soporte</Text>
+      <View style={styles.divider}></View>
+      <View style={styles.textcontainers}>
+        <Text style={styles.textsupp}>Soporte</Text>
       </View>
       <ProfileComponent
         icon="terms"
@@ -81,7 +101,7 @@ export default function ProfilePage() {
         onClick={() => setModalVisible(!modalVisible)}
       />
       <ProfileComponent icon="info" text="Acerca de Nosotros" />
-      <View style={{ display: 'flex' }}>
+      <View style={styles.profileComponentLogContainer}>
         <ProfileComponentLog />
       </View>
       <Modal
@@ -93,40 +113,16 @@ export default function ProfilePage() {
         }}
       >
         <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <ScrollView
-            style={{
-              height: '30%',
-              marginTop: '100%',
-              backgroundColor: '#D7DDFF',
-              paddingVertical: 21,
-              paddingHorizontal: 16,
-              borderTopEndRadius: 45,
-              borderTopStartRadius: 45,
-            }}
-          >
-            <View style={{ marginBottom: 30 }}>
-              <Text style={style.textgreet}>Términos y Condiciones</Text>
-              <Text
-                style={{
-                  marginTop: 30,
-                  fontFamily: 'montserrat_regular',
-                  fontSize: 14,
-                  textAlign: 'justify',
-                }}
-              >
+          <ScrollView style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.textgreet}>Términos y Condiciones</Text>
+              <Text style={styles.modalText}>
                 Al usar esta aplicación, aceptas nuestros términos. La app está diseñada para pausas
                 activas y hábitos saludables, pero no reemplaza el asesoramiento médico. Úsala bajo
                 tu responsabilidad y consulta a un profesional de la salud antes de cambiar tu
                 rutina. El contenido puede cambiar sin previo aviso.
               </Text>
-              <Text
-                style={{
-                  marginTop: 30,
-                  fontFamily: 'montserrat_semibold',
-                  fontSize: 16,
-                  textAlign: 'justify',
-                }}
-              >
+              <Text style={styles.modalText}>
                 ¡Gracias por tu comprensión y disfruta de una vida más activa y saludable con
                 nuestra aplicación!
               </Text>
@@ -135,7 +131,6 @@ export default function ProfilePage() {
           </ScrollView>
         </TouchableWithoutFeedback>
       </Modal>
-      <BotonNot />
     </View>
   );
 }
@@ -150,20 +145,7 @@ const ProfileComponent = ({
   return (
     <TouchableOpacity
       onPress={onClick}
-      style={{
-        marginTop: 20,
-        display: 'flex',
-        width: '92%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        gap: 10,
-        alignSelf: 'center',
-        height: 50,
-        paddingHorizontal: 12,
-        borderRadius: 10,
-        backgroundColor: 'rgba(50, 69, 64, 0.05)',
-      }}
+      style={styles.profileComponentContainer}
     >
       {icon == 'edit' && <Octicons name="pencil" size={20} color="#09A4B7" />}
       {icon == 'terms' && (
@@ -171,48 +153,17 @@ const ProfileComponent = ({
       )}
       {icon == 'info' && <Feather name="lock" size={20} color="#09A4B7" />}
 
-      <Text style={{ color: '#646F77', fontFamily: 'montserrat_semibold', fontSize: 12 }}>
-        {text}
-      </Text>
-      <MaterialIcons name="arrow-forward-ios" size={20} color="#67397E" />
+      <Text style={styles.profileComponentText}>{text}</Text>
+      <View style={{ flex: 1 }}>
+        <MaterialIcons name="arrow-forward-ios" size={30} color="#67397E" style={{ width: 30, left: '90%' }} />
+      </View>
     </TouchableOpacity>
   );
 };
 
-const ProfileComponentLog = ({
-  text = 'Cerrar Sesión',
-  icon = 'nada',
-  onClick = () => {
-    console.log('cerrar');
-  },
-}) => {
-  return (
-    <TouchableOpacity
-      onPress={onClick}
-      style={{
-        marginTop: 80,
-        display: 'flex',
-        width: '92%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        gap: 10,
-        alignSelf: 'center',
-        height: 50,
-        paddingHorizontal: 12,
-        borderRadius: 10,
-        backgroundColor: 'rgba(50, 69, 64, 0.05)',
-      }}
-    >
-      <Feather name="log-out" size={20} color="#67397E" />
-      <Text style={{ color: '#67397E', fontFamily: 'montserrat_semibold', fontSize: 12 }}>
-        {text}
-      </Text>
-      <MaterialIcons name="arrow-forward-ios" size={20} color="#67397E" />
-    </TouchableOpacity>
-  );
-};
-const style = StyleSheet.create({
+
+
+const styles = StyleSheet.create({
   container: {
     paddingVertical: 21,
     paddingHorizontal: 16,
@@ -221,35 +172,114 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
   },
   textcontainer: {
-    display: 'flex',
     marginBottom: 37,
   },
   textcontainers: {
     display: 'flex',
   },
   textgreet: {
-    textAlign: 'left',
     fontFamily: 'montserrat_semibold',
     fontSize: 20,
     color: '#102B3F',
   },
   textsupp: {
     paddingLeft: 25,
-    textAlign: 'left',
     fontFamily: 'montserrat_semibold',
     fontSize: 16,
     color: '#102B3F',
   },
   textprof: {
-    textAlign: 'left',
     fontFamily: 'montserrat_semibold',
     fontSize: 20,
     color: '#102B3F',
   },
   textemail: {
-    textAlign: 'left',
     fontFamily: 'montserrat_semibold',
     fontSize: 12,
     color: '#102B3F',
+  },
+  profileInfoContainer: {
+    flexDirection: 'row',
+    gap: 40,
+  },
+  profileImageContainer: {
+    borderRadius: 50,
+    height: 100,
+    width: 100,
+    backgroundColor: '#C1ECDB',
+  },
+  editButton: {
+    height: 24,
+    width: 24,
+    borderRadius: 12,
+    backgroundColor: '#09A4B7',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 70,
+    left: 80,
+  },
+  editIcon: {
+    height: 14,
+    width: 14,
+    backgroundColor: '#09A4B7',
+  },
+  profileTextContainer: {
+    display: 'flex',
+    gap: 20,
+  },
+  profileComponentContainer: {
+    marginTop: 20,
+    display: 'flex',
+    width: '92%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 10,
+    alignSelf: 'center',
+    height: 50,
+    paddingHorizontal: 12,
+    borderRadius: 10,
+    backgroundColor: 'rgba(50, 69, 64, 0.05)',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: -2,
+      height: 4,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+
+    elevation: 12,
+  },
+  profileComponentText: {
+    color: '#646F77',
+    fontFamily: 'montserrat_semibold',
+    fontSize: 12,
+  },
+  profileComponentLogContainer: {
+    display: 'flex',
+  },
+  divider: {
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(193, 236, 219, .8)',
+    marginTop: 25,
+    marginBottom: 25,
+  },
+  modalContainer: {
+    height: '30%',
+    marginTop: '100%',
+    backgroundColor: '#D7DDFF',
+    paddingVertical: 21,
+    paddingHorizontal: 16,
+    borderTopEndRadius: 45,
+    borderTopStartRadius: 45,
+  },
+  modalContent: {
+    marginBottom: 30,
+  },
+  modalText: {
+    marginTop: 30,
+    fontFamily: 'montserrat_regular',
+    fontSize: 14,
+    textAlign: 'justify',
   },
 });

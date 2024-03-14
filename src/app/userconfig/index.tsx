@@ -4,6 +4,7 @@ import Boton from '@/ui/Boton';
 import { useRouter, Redirect } from 'expo-router';
 import { useOnboarding } from '@/storages/authstore';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { guardarGenero } from '@/services/UserConfigServices';
 
 const UserConfig = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -13,6 +14,9 @@ const UserConfig = () => {
 
   const handleNext = () => {
     router.push('./configAgeScreen');
+
+    if (activeIndex) guardarGenero(activeIndex);
+    
   };
 
   const handleSkip = () => {
@@ -65,7 +69,7 @@ const UserConfig = () => {
         <View style={{ display: 'flex', flexDirection: 'row', gap: 14 }}>
           <TouchableOpacity
             style={{
-              backgroundColor: activeIndex == 1 ? '#102B3F' : '#09A4B7',
+              backgroundColor: activeIndex === 'Femenino' ? '#102B3F' : '#09A4B7',
               borderRadius: 50,
               height: 100,
               width: 100,
@@ -74,14 +78,14 @@ const UserConfig = () => {
               alignItems: 'center',
             }}
             onPress={() => {
-              setActiveIndex(1);
+              setActiveIndex('Femenino');
             }}
           >
             <Text style={styles.text1}>Femenino</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              backgroundColor: activeIndex == 2 ? '#102B3F' : '#09A4B7',
+              backgroundColor: activeIndex === 'Masculino' ? '#102B3F' : '#09A4B7',
               borderRadius: 50,
               height: 100,
               width: 100,
@@ -90,14 +94,14 @@ const UserConfig = () => {
               alignItems: 'center',
             }}
             onPress={() => {
-              setActiveIndex(2);
+              setActiveIndex('Masculino');
             }}
           >
             <Text style={styles.text1}>Masculino</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              backgroundColor: activeIndex == 3 ? '#102B3F' : '#09A4B7',
+              backgroundColor: activeIndex == 'Otro' ? '#102B3F' : '#09A4B7',
               borderRadius: 50,
               height: 100,
               width: 100,
@@ -106,7 +110,7 @@ const UserConfig = () => {
               alignItems: 'center',
             }}
             onPress={() => {
-              setActiveIndex(3);
+              setActiveIndex('Otro');
             }}
           >
             <Text style={styles.text1}>Otro</Text>
@@ -125,7 +129,10 @@ const UserConfig = () => {
               textDecorationLine: 'none',
               color: 'black',
             }}
-            onPress={(isChecked) => setSelection(isChecked)}
+            onPress={(isChecked) => {
+              setSelection(isChecked)
+              setActiveIndex('s/e');
+            }}
           />
         </View>
       </View>

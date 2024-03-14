@@ -3,19 +3,35 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Boton from '@/ui/Boton';
 import { useRouter, Redirect } from 'expo-router';
 import { useOnboarding } from '@/storages/authstore';
-import { AgregarHorariosConfig } from '@/components/settingsComponent/AgregarHorarios';
+import { AgregarHorarios } from '@/components/settingsComponent/AgregarHorarios';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+
+import useHorariosStore from '@/storages/horariosstore';
+import { guardarHorariosUsuario } from '@/services/TimesServices';
+
 const ConfigTime = () => {
   const [isSelected, setSelection] = useState(false);
   const setOnboarding = useOnboarding((state) => state.setOnboarding);
   const router = useRouter();
 
-  const handleNext = () => {
+  const { selectedDays, selectedStartTime, selectedEndTime, setSelectedDays, setSelectedStartTime, setSelectedEndTime } = useHorariosStore();
+
+  const handleNext = async () => {
     router.push('./configNots');
+
+    if (selectedDays && selectedDays.length > 0 && selectedStartTime && selectedStartTime.trim() !== '' && selectedEndTime && selectedEndTime.trim() !== '') {
+
+      await guardarHorariosUsuario(selectedDays, selectedStartTime, selectedEndTime);
+
+      setSelectedDays([]);
+      setSelectedStartTime('');
+      setSelectedEndTime('');
+    }
   };
   const handleSkip = () => {
     router.replace('homeScreen');
   };
+
   return (
     <>
       <View style={styles.container}>
@@ -56,7 +72,7 @@ const ConfigTime = () => {
         <Text style={styles.text}> </Text>
         <Text style={styles.title}>Cuales son tus horarios frente a la pantalla?</Text>
         <View style={{ display: 'flex', flexDirection: 'row', gap: 14 }}>
-          <AgregarHorariosConfig />
+          <AgregarHorarios />
         </View>
         <View style={styles.checkboxContainer}>
           <BouncyCheckbox

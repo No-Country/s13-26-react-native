@@ -6,13 +6,13 @@ import { AgregarHorarios } from './AgregarHorarios';
 import Boton from '@/ui/Boton';
 import useHorariosStore from '@/storages/horariosstore';
 import { MyAppText } from '@/ui/MyAppText';
+import { DayTimer } from '../dayTimer/DayTimer';
 
 export const Horarios = () => {
   const [horarios, setHorarios] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [isDeleting, setIsDeleting] = useState(false);
   const [mostrarAgregarHorarios, setMostrarAgregarHorarios] = useState(false);
-
   const { selectedDays, selectedStartTime, selectedEndTime, setSelectedDays, setSelectedStartTime, setSelectedEndTime } = useHorariosStore();
 
   useEffect(() => {
@@ -26,7 +26,6 @@ export const Horarios = () => {
         setIsLoading(false);
       }
     };
-
     fetchHorarios();
   }, []);
 
@@ -37,15 +36,16 @@ export const Horarios = () => {
       [
         {
           text: 'Aceptar', onPress: async () => {
+            setIsDeleting(true);
             await eliminarHorario(horarioId);
             const nuevosHorarios = horarios.filter(horario => horario !== horarioId);
             setHorarios(nuevosHorarios);
+            setIsDeleting(false);
           }
         },
         { text: 'Cancelar', onPress: () => null, style: 'cancel' }
       ]
     );
-
   };
 
   const diferenciaDeHoras = (inicio, final) => {
@@ -64,7 +64,7 @@ export const Horarios = () => {
   const borrarHorariosUsuario = async () => {
     await guardarHorariosUsuario(selectedDays, selectedStartTime, selectedEndTime);
     const nuevosHorarios = await obtenerHorariosUsuario();
-  
+
     setHorarios(nuevosHorarios);
     setSelectedDays([]);
     setSelectedStartTime('');
@@ -74,13 +74,13 @@ export const Horarios = () => {
 
   return (
     <View style={styles.container}>
-      <MyAppText style={{ fontWeight: 'bold', fontSize: 16 }}>Mis horarios frente a la pantalla</MyAppText>
+      <MyAppText style={styles.title}>Mis horarios frente a la pantalla</MyAppText>
       {mostrarAgregarHorarios ? (
         <>
           <AgregarHorarios />
-          <View style={{ flex: 1, width: '100%', justifyContent: 'flex-end' }}>
-            <View style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginBottom: 40 }}>
-              <Boton title='Atrás' onPress={() => setMostrarAgregarHorarios(!mostrarAgregarHorarios)} styles={{backgroundColor: 'transparent'}} textStyles={{color: '#F78764'}}/>
+          <View style={styles.bottomButtonContainer}>
+            <View style={styles.bottomButtonRow}>
+              <Boton title='Atrás' onPress={() => setMostrarAgregarHorarios(!mostrarAgregarHorarios)} styles={{ backgroundColor: 'transparent' }} textStyles={{ color: '#F78764' }} />
               <Boton title='Listo' onPress={borrarHorariosUsuario} />
             </View>
           </View>
@@ -89,71 +89,62 @@ export const Horarios = () => {
         <ActivityIndicator size="large" color="#0000ff" />
       ) : horarios?.length > 0 ? (
         <>
-        {horarios?.map((horario, index) => (
-          <View key={index} style={styles.horarioContainer}>
+          {horarios?.map((horario, index) => (
+            <View key={index} style={styles.horarioContainer}>
 
-            <View style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: 10,
-              marginHorizontal: 8
-            }}>
+              <View style={styles.horarioRow}>
 
-              <MyAppText style={{ fontWeight: '500', color: '#102B3F', fontFamily: 'montserrat_regular' }}>
-                {horario.dias.join('  ')}
-              </MyAppText>
+                <MyAppText style={styles.diasText}>
+                  {horario.dias.join('  ')}
+                </MyAppText>
 
-              <View style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: 36,
-                marginRight: 8
-              }} >
-                <FontAwesome
-                  name="trash-o"
-                  size={20}
-                  color="#09A4B7"
-                  onPress={() => handleEliminarHorario(horario)} />
-                <Octicons
-                  name="pencil"
-                  size={20}
-                  color="#09A4B7" />
-              </View >
+                <View style={styles.iconRow}>
+                  <FontAwesome
+                    name="trash-o"
+                    size={20}
+                    color="#09A4B7"
+                    onPress={() => handleEliminarHorario(horario)} />
+                  <Octicons
+                    name="pencil"
+                    size={20}
+                    color="#09A4B7" />
+                </View>
 
-            </View >
+              </View>
 
-            <View style={{
-              marginVertical: 10,
-              marginHorizontal: 10,
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-              <MyAppText style={{ fontSize: 20, fontWeight: 600, color: '#102B3F' }}>
-                {diferenciaDeHoras(horario.inicio, horario.final)} horas
-              </MyAppText>
-              <MyAppText style={{ marginTop: 10, color: '#102B3F', fontWeight: '400', fontSize: 14, fontFamily: 'montserrat_regular' }}>
-                {horario.inicio} - {horario.final} hrs
-              </MyAppText >
-            </View >
-          </View >
+              <View style={styles.horarioDetails}>
+                <MyAppText style={styles.hoursText}>
+                  {diferenciaDeHoras(horario.inicio, horario.final)} horas
+                </MyAppText>
+                <MyAppText style={styles.timeText}>
+                  {horario.inicio} - {horario.final} hrs
+                </MyAppText>
+              </View>
+            </View>
           ))}
-          <View style={styles.absoluteButtonContainer}>
+          <View style={styles.addButtonContainer}>
             <Boton title='Agregar' onPress={() => setMostrarAgregarHorarios(true)} />
           </View>
+          {isDeleting && (
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          )}
         </>
       ) : (
-        <View style={styles.sinHorarioContainer}>
-          <MyAppText style={{ fontSize: 20, fontWeight: '500' }}>¿Aún no agregas tus horarios?</MyAppText>
-          <MyAppText style={{ textAlign: 'center', marginVertical: 10 }}>Agrega tus horarios frente a la pantalla y activa las notificaciones</MyAppText>
-
-          <Boton title='Agregar' onPress={() => setMostrarAgregarHorarios(!mostrarAgregarHorarios)}  />
-
-        </View >
+        <View style={styles.noHorarioContainer}>
+          <MyAppText style={styles.noHorarioTitle}>¿Aún no agregas tus horarios?</MyAppText>
+          <MyAppText style={styles.noHorarioText}>Agrega tus horarios frente a la pantalla y activa las notificaciones</MyAppText>
+          <Boton title='Agregar' onPress={() => setMostrarAgregarHorarios(!mostrarAgregarHorarios)} />
+        </View>
       )}
-    </View >
+      {!isLoading && !mostrarAgregarHorarios && (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+        <DayTimer />
+      </View>
+      )}
+      
+    </View>
   );
 }
 
@@ -162,6 +153,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 30,
     alignItems: 'center'
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 16
   },
   horarioContainer: {
     backgroundColor: '#E1F4EF',
@@ -172,7 +167,58 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#09A4B7'
   },
-  sinHorarioContainer: {
+  horarioRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+    marginHorizontal: 8
+  },
+  diasText: {
+    fontWeight: '500',
+    color: '#102B3F',
+    fontFamily: 'montserrat_regular'
+  },
+  iconRow: {
+    flexDirection: 'row',
+    gap: 36,
+    marginRight: 8
+  },
+  horarioDetails: {
+    marginVertical: 10,
+    marginHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  hoursText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#102B3F'
+  },
+  timeText: {
+    marginTop: 10,
+    color: '#102B3F',
+    fontWeight: '400',
+    fontSize: 14,
+    fontFamily: 'montserrat_regular'
+  },
+  bottomButtonContainer: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'flex-end'
+  },
+  bottomButtonRow: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    marginBottom: 40
+  },
+  addButtonContainer: {
+    position: 'absolute',
+    bottom: 40,
+    right: 10,
+  },
+  noHorarioContainer: {
     backgroundColor: 'lightgray',
     width: '100%',
     padding: 10,
@@ -181,9 +227,12 @@ const styles = StyleSheet.create({
     minHeight: '20%',
     alignItems: 'center'
   },
-  absoluteButtonContainer: {
-    position: 'absolute',
-    bottom: 40,
-    right: 10,
+  noHorarioTitle: {
+    fontSize: 20,
+    fontWeight: '500'
   },
+  noHorarioText: {
+    textAlign: 'center',
+    marginVertical: 10
+  }
 });
