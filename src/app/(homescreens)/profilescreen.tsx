@@ -146,6 +146,7 @@ const ProfileComponent = ({
     <TouchableOpacity
       onPress={onClick}
       style={styles.profileComponentContainer}
+
     >
       {icon == 'edit' && <Octicons name="pencil" size={20} color="#09A4B7" />}
       {icon == 'terms' && (
@@ -157,6 +158,7 @@ const ProfileComponent = ({
       <View style={{ flex: 1 }}>
         <MaterialIcons name="arrow-forward-ios" size={30} color="#67397E" style={{ width: 30, left: '90%' }} />
       </View>
+
     </TouchableOpacity>
   );
 };
