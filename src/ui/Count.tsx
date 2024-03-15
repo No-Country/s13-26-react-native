@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, Feather } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { sumarMedalla } from '@/services/MedalsServices';
 
@@ -28,7 +28,7 @@ function Count({ duration }: { duration: number }) {
             size={115}
             onComplete={() => {
               setComplete(true);
-              ejercicioCompleto(); // Llama a la función ejercicioCompleto cuando se completa el temporizador
+              ejercicioCompleto();
             }}
           >
             {({ remainingTime }) => <Text style={style.timerText}>{remainingTime}</Text>}
@@ -46,7 +46,7 @@ function Count({ duration }: { duration: number }) {
             1 medalla
           </Text>
           <View style={style.iconContainer}>
-            <Entypo name="medal" size={24} color="black" />
+          <Feather name="award" size={28} color={'#F78764'} />
           </View>
         </View>
       )}
@@ -75,10 +75,11 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   textWin: {
-    fontSize: 18,
+    fontSize: 22,
     textAlign: 'center',
     marginBottom: 10,
     fontFamily: 'montserrat_semibold',
+    color: '#67397E'
   },
   iconContainer: {
     alignItems: 'center',

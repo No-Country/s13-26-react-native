@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import Boton from '@/ui/Boton';
 import { useRouter, Redirect } from 'expo-router';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import ScrollPicker from 'react-native-wheel-scrollview-picker';
+import { guardarEdad } from '@/services/UserConfigServices';
 
 const age = [];
 for (let i = 15; i < 99; i++) {
   age.push(i);
 }
 const ConfigAge = () => {
+  const [edad, setEdad] = useState(undefined)
   const router = useRouter();
 
   const handleNext = () => {
     router.push('./configTime');
+    if (edad) guardarEdad(edad);
   };
   const handleSkip = () => {
     router.replace('homeScreen');
@@ -80,7 +82,7 @@ const ConfigAge = () => {
               );
             }}
             onValueChange={(data, selectedIndex) => {
-              console.log(data);
+              setEdad(data)
             }}
             wrapperBackground="transparent"
             wrapperHeight={120}

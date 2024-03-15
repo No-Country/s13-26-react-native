@@ -55,7 +55,6 @@ const Auth = () => {
           id: register.user.uid,
           email: register.user.email,
           name: nombre,
-          tel: register.user.phoneNumber,
           image: register.user.photoURL,
         });
         await sendEmailVerification();
