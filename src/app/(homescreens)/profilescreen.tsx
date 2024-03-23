@@ -242,13 +242,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(50, 69, 64, 0.05)',
     shadowColor: "#000",
     shadowOffset: {
-      width: -2,
-      height: 4,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.37,
-    shadowRadius: 7.49,
+    shadowRadius: 2,
 
-    elevation: 12,
+    elevation: 5,
   },
   profileComponentText: {
     color: '#646F77',

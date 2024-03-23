@@ -2,18 +2,21 @@ import { Firebase_Auth, Firestore_Db } from '@/components/auth/FirebaseConfig';
 import { query, collection, getDocs, where, doc, getDoc } from 'firebase/firestore';
 
 export const UserData = async () => {
-  const user = Firebase_Auth?.currentUser;
-  const uid = user?.uid;
+  await new Promise(resolve => Firebase_Auth.onAuthStateChanged(user => {
+      if (user) resolve(undefined);
+  }));
 
+  const user = Firebase_Auth.currentUser;
+  const uid = user.uid;
+  console.log(uid);
   const q = query(collection(Firestore_Db, 'users'), where('id', '==', uid));
   const querySnapshot = await getDocs(q);
-
   if (!querySnapshot.empty) {
-    return querySnapshot;
+      return querySnapshot;
   } else {
-    console.log('No se encontro informacion del usuario')
+      console.log('No se encontró información del usuario');
   }
-}
+};
 
 export const UserInformation = async () => {
   const querySnapshot = await UserData();
