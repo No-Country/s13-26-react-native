@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Button, Platform } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Entypo, FontAwesome6 } from '@expo/vector-icons';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 
 export const DayTimer = () => {
-  const [start, setStart] = useState(false)
+  const [start, setStart] = useState(false);
+  const [intervalId, setIntervalId] = useState(null); // Para almacenar el ID del intervalo
 
   const [expoPushToken, setExpoPushToken] = useState('');
-  const [notification, setNotification] = useState(false);
+  const [, setNotification] = useState(false);
 
   const notificationListener = useRef();
   const responseListener = useRef();
@@ -31,12 +32,35 @@ export const DayTimer = () => {
     };
   }, []);
 
+  const startTimer = async () => {
+    const newIntervalId = setInterval(() => {
+      sendNotification(); // Enviar notificación cada minuto
+    }, 60000); // 60000 milisegundos = 1 minuto
+
+    setIntervalId(newIntervalId);
+  };
+
+  const stopTimer = () => {
+    clearInterval(intervalId); // Detener el intervalo
+    setIntervalId(null);
+  };
+
+  const sendNotification = async () => {
+    await schedulePushNotification(expoPushToken);
+  };
+
   return (
     <View>
-      <TouchableOpacity style={styles.container} onPress={async () => {
-        setStart(!start)
-        await schedulePushNotification(expoPushToken);
-      }}
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => {
+          setStart(!start);
+          if (!start) {
+            startTimer(); // Iniciar temporizador cuando se presiona
+          } else {
+            stopTimer(); // Detener temporizador cuando se presiona
+          }
+        }}
       >
         {start ? (
           <FontAwesome6 name="pause" size={50} color="white" />
@@ -45,29 +69,21 @@ export const DayTimer = () => {
         )}
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#09A4B7',
-    width: 160,
-    height: 160,
+    width: 130,
+    height: 130,
     borderRadius: 100,
     justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
+    alignItems: 'center',
+  },
 });
 
-async function schedulePushNotification() {
+async function schedulePushNotification(expoPushToken) {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: 'Paréntesis',
@@ -75,7 +91,7 @@ async function schedulePushNotification() {
       data: { data: 'goes here' },
       priority: 'high',
     },
-    trigger: { seconds: 5 },
+    trigger: null, // No establecer un trigger para que la notificación no se muestre inmediatamente
   });
 }
 

@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import { Horarios } from '@/components/settingsComponent/Horarios';
 import Notifications from '../Notifications';
+import { Shadow } from 'react-native-shadow-2';
 
 export default function ProfilePage() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -50,11 +51,6 @@ const styles = StyleSheet.create({
     borderColor: '#ebebeb',
     borderWidth: 4,
     borderRadius: 14,
-    elevation: 5, // Sombras en Android
-    shadowColor: '#000', // Sombras en iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
   },
   tab: {
     backgroundColor: '#ebebeb',
