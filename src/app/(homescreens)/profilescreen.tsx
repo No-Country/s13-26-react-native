@@ -19,13 +19,12 @@ import {
 import Boton from '@/ui/Boton';
 import { UserInformation } from '@/services/UserData';
 import { Firebase_Auth } from '@/components/auth/FirebaseConfig';
-import {
-  useSignOut,
-} from 'react-firebase-hooks/auth';
+import { useSignOut } from 'react-firebase-hooks/auth';
 import { useRouter } from 'expo-router';
+import { Shadow } from 'react-native-shadow-2';
 
 export default function ProfilePage() {
-  const [signOut, loadingOut] = useSignOut(Firebase_Auth);
+  const [signOut] = useSignOut(Firebase_Auth);
   const router = useRouter();
   const [userData, setUserData] = useState({
     username: '...',
@@ -53,23 +52,26 @@ export default function ProfilePage() {
 
   const ProfileComponentLog = ({
     text = 'Cerrar Sesión',
-    icon = 'nada',
     onClick = () => {
       signOut
       router.replace('loginscreen');
     },
   }) => {
     return (
-      <TouchableOpacity
-        onPress={onClick}
-        style={styles.profileComponentContainer}
-      >
-        <Feather name="log-out" size={20} color="#67397E" />
-        <Text style={styles.profileComponentText}>{text}</Text>
-        <View style={{ flex: 1 }}>
-          <MaterialIcons name="arrow-forward-ios" size={30} color="#67397E" style={{ width: 30, left: '90%' }} />
-        </View>
-      </TouchableOpacity>
+      <View style={{ marginTop: 60, width: '80%', alignSelf: 'center' }}>
+        <Shadow distance={10} startColor={'#d0d0d0'} endColor={'#fff'} offset={[0, 3]} >
+          <TouchableOpacity
+            onPress={onClick}
+            style={styles.profileComponentContainer}
+          >
+            <Feather name="log-out" size={20} color="#67397E" />
+            <Text style={styles.profileComponentText}>{text}</Text>
+            <View style={{ flex: 1 }}>
+              <MaterialIcons name="arrow-forward-ios" size={30} color="#67397E" style={{ width: 30, left: '90%' }} />
+            </View>
+          </TouchableOpacity>
+        </Shadow>
+      </View>
     );
   };
 
@@ -143,23 +145,25 @@ const ProfileComponent = ({
   },
 }) => {
   return (
-    <TouchableOpacity
-      onPress={onClick}
-      style={styles.profileComponentContainer}
+    <View style={{ marginTop: 20, width: '80%', alignSelf: 'center' }}>
+      <Shadow distance={10} startColor={'#d0d0d0'} endColor={'#fff'} offset={[0, 3]} >
+        <TouchableOpacity
+          onPress={onClick}
+          style={styles.profileComponentContainer}
+        >
+          {icon == 'edit' && <Octicons name="pencil" size={20} color="#09A4B7" />}
+          {icon == 'terms' && (
+            <MaterialCommunityIcons name="file-document-multiple-outline" size={20} color="#09A4B7" />
+          )}
+          {icon == 'info' && <Feather name="lock" size={20} color="#09A4B7" />}
 
-    >
-      {icon == 'edit' && <Octicons name="pencil" size={20} color="#09A4B7" />}
-      {icon == 'terms' && (
-        <MaterialCommunityIcons name="file-document-multiple-outline" size={20} color="#09A4B7" />
-      )}
-      {icon == 'info' && <Feather name="lock" size={20} color="#09A4B7" />}
-
-      <Text style={styles.profileComponentText}>{text}</Text>
-      <View style={{ flex: 1 }}>
-        <MaterialIcons name="arrow-forward-ios" size={30} color="#67397E" style={{ width: 30, left: '90%' }} />
-      </View>
-
-    </TouchableOpacity>
+          <Text style={styles.profileComponentText}>{text}</Text>
+          <View style={{ flex: 1 }}>
+            <MaterialIcons name="arrow-forward-ios" size={30} color="#67397E" style={{ width: 30, left: '90%' }} />
+          </View>
+        </TouchableOpacity>
+      </Shadow>
+    </View>
   );
 };
 
@@ -231,9 +235,9 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   profileComponentContainer: {
-    marginTop: 20,
+    // marginTop: 20,
     display: 'flex',
-    width: '92%',
+    // width: '90%',
     alignItems: 'center',
     flexDirection: 'row',
     gap: 10,
@@ -241,16 +245,8 @@ const styles = StyleSheet.create({
     height: 50,
     paddingHorizontal: 12,
     borderRadius: 10,
-    backgroundColor: 'rgba(50, 69, 64, 0.05)',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.37,
-    shadowRadius: 2,
-
-    elevation: 5,
+    backgroundColor: 'white',
+    // backgroundColor: 'blue',
   },
   profileComponentText: {
     color: '#646F77',

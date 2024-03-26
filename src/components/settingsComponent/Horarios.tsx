@@ -20,6 +20,7 @@ export const Horarios = () => {
       try {
         const horariosUsuario = await obtenerHorariosUsuario();
         setHorarios(horariosUsuario);
+        console.log(horariosUsuario)
       } catch (error) {
         console.error('Error al obtener los horarios del usuario:', error);
       } finally {

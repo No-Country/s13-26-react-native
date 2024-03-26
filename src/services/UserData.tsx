@@ -8,7 +8,7 @@ export const UserData = async () => {
 
   const user = Firebase_Auth.currentUser;
   const uid = user.uid;
-  console.log(uid);
+  
   const q = query(collection(Firestore_Db, 'users'), where('id', '==', uid));
   const querySnapshot = await getDocs(q);
   if (!querySnapshot.empty) {
